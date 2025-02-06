@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Hamburger from "hamburger-react";
-
+import { useNavigate } from "react-router-dom";
 export default function NavbarText({ links }) {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const onSubmit = async () => {
     sessionStorage.removeItem("adminLogin", true);
 
-    navigate("/admin");
+    navigate("/login");
     window.location.reload();
   };
   return (
