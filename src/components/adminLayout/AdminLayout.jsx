@@ -1,10 +1,12 @@
 import MainContentWrapper from "../../ui/MainContentWrapper";
+import Header from "../Header/header";
 
 const AdminLayout = ({ children }) => {
   return (
-    <div className="bg-[#59749A]">
+    <div>
       <MainContentWrapper>
         {/* header here */}
+        <Header />
         <main>{children}</main>
         {/* footer here */}
       </MainContentWrapper>
