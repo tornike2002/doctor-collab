@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useGetbanner } from "../../hooks/useGetBanner";
+import BannerSkeleton from "./banner/BannerSkeleton";
 export default function Banner() {
   const { data, error, isError, isLoading } = useGetbanner();
   console.log(data);
@@ -26,7 +27,7 @@ export default function Banner() {
   };
 
   if (isLoading) {
-    // return <BannerSkeleton />;
+    return <BannerSkeleton />;
   }
 
   if (isError) {
