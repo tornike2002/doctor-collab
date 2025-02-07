@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Hamburger from "hamburger-react";
 import { useNavigate } from "react-router-dom";
-
+import Header from "../header";
 export default function NavbarText({ links }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
