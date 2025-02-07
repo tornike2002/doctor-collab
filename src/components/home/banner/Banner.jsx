@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { useGetbanner } from "../../hooks/useGetBanner";
-import BannerSkeleton from "./banner/BannerSkeleton";
+import threedot from "/public/imgs/7066144.png";
+import BannerSkeleton from "./BannerSkeleton";
+import deletes from "/public/imgs/delte.jpg";
+import corect from "/public/imgs/check-mark-icon-checkmark-right-symbol-tick-sign-ok-button-correct-circle-icon-free-vector.jpg";
+
+import { useGetbanner } from "../../../hooks/useGetBanner";
 export default function Banner() {
   const { data, error, isError, isLoading } = useGetbanner();
   console.log(data);
@@ -43,7 +47,7 @@ export default function Banner() {
     <div>
       {" "}
       <form onSubmit={handleUpdateDescription}>
-        <div className="bg-softBlue bg-[#e61818] py-[3.81rem] px-[3.81rem] break-words mt-[8rem] flex justify-between items-center">
+        <div className="bg-softBlue bg-[#CBDEEF] py-[3.81rem] px-[3.81rem] break-words mt-[8rem] flex justify-between items-center">
           <div className="w-3/4 font-semibold text-[4rem]">
             {updateText ? (
               <input
@@ -64,14 +68,14 @@ export default function Banner() {
               </p>
             )}
           </div>
-
+          <img className=" w-[100px] rounded-[50%]  " src={deletes} alt="" />
           {buttonChange ? (
             <button type="submit" className="text-[1.5rem]">
-              Save
+              <img className=" w-[100px] rounded-[50%]  " src={corect} alt="" />
             </button>
           ) : (
-            <p onClick={handleEdit} className="text-[1.5rem] cursor-pointer">
-              Edit Text
+            <p onClick={handleEdit} className=" cursor-pointer">
+              <img className="w-[50px] " src={threedot} alt="" />
             </p>
           )}
         </div>
