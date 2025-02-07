@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import DoctorLogo from "/public/imgs/cd0af474c82e8359413ce2d038a045ea.jpg";
 import NavbarText from "./NavbarText";

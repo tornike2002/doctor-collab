@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Hamburger from "hamburger-react";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,6 @@ export default function NavbarText({ links }) {
     sessionStorage.removeItem("adminLogin", true);
 
     navigate("/login");
-    // window.location.reload();
   };
   return (
     <div>
