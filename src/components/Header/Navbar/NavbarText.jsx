@@ -9,7 +9,7 @@ export default function NavbarText({ links }) {
     sessionStorage.removeItem("adminLogin", true);
 
     navigate("/login");
-    window.location.reload();
+    // window.location.reload();
   };
   return (
     <div>
