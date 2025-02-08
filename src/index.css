@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0px;
+  padding: 0px;
+}
 @layer utilities {
   .main-loader {
     width: 50px;

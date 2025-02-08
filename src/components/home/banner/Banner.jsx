@@ -1,95 +1,86 @@
 import { useState } from "react";
-import threedot from "/public/imgs/7066144.png";
-import BannerSkeleton from "./BannerSkeleton";
-import deletes from "/public/imgs/delte.jpg";
-import corect from "/public/imgs/check-mark-icon-checkmark-right-symbol-tick-sign-ok-button-correct-circle-icon-free-vector.jpg";
-import { UpdateBanner } from "../../../services/homeServices";
 import { useGetbanner } from "../../../hooks/useGetBanner";
+import threedots from "/public/imgs/7066144.png";
+
 export default function Banner() {
   const { data, error, isError, isLoading } = useGetbanner();
-  console.log(data);
-  const { updateTitle } = UpdateBanner();
-  const [updateText, setUpdateText] = useState(false);
-  const [buttonChange, setButtonChange] = useState(false);
-  const [editError, setEditError] = useState("");
+  const { id, title } = data?.title ? data.title[0] || {} : {};
+  const [showBox, setShowBox] = useState(false); // Controls the visibility of the small box
+  const [showOverlay, setShowOverlay] = useState(false); // Controls the visibility of the overlay
 
-  const { id, title } = data?.title[0] || {};
+  // Toggle the small box visibility
+  const handleThreedotsClick = () => {
+    setShowBox((prev) => !prev);
+  };
 
-  const handleUpdateDescription = async (e) => {
-    e.preventDefault();
-    if (!id) return;
-    const text = formData.get("text");
-    if (!text || text.trim().length < 5) {
-      setEditError("Text must be at least 5 characters long.");
-    } else {
-      try {
-        await updateTitle({ id, title: text }); // გამოიყენეთ updateTitle
-        setUpdateText(false);
-        setButtonChange(false);
-        setEditError("");
-      } catch (error) {
-        console.error("Failed to update banner:", error);
-        setEditError("Failed to update banner. Please try again.");
-      }
-    }
+  // Show the overlay and hide the small box
+  const handleChangeClick = () => {
+    setShowOverlay(true);
+    setShowBox(false);
+  };
+
+  // Close the overlay
+  const handleCloseOverlay = () => {
+    setShowOverlay(false);
   };
 
   if (isLoading) {
-    return <BannerSkeleton />;
+    return <div>Loading...</div>; // Display a loading indicator
   }
 
   if (isError) {
-    return <p>{error.message}</p>;
-  }
-
-  function handleEdit() {
-    setUpdateText((prev) => !prev);
-    setButtonChange((prev) => !prev);
+    return <div>Error: {error.message}</div>; // Display an error message
   }
 
   return (
     <div>
-      {" "}
-      <form onSubmit={handleUpdateDescription}>
-        <div className="bg-softBlue bg-[#CBDEEF] py-[3.81rem] px-[3.81rem] break-words mt-[8rem] flex justify-between items-center">
-          <div className="w-3/4 font-semibold text-[4rem]">
-            {updateText ? (
-              <input
-                type="text"
-                name="text"
-                placeholder="Update description"
-                className={`placeholder:font-normal pl-6 text-[2rem] rounded-lg h-[4rem] ${
-                  editError && " border-red-500 border-2"
-                }`}
-                defaultValue={title}
-              />
-            ) : (
-              title
-            )}
-            {editError && (
-              <p className="text-red-500 text-[1rem] font-normal">
-                {editError}
-              </p>
-            )}
-          </div>
+      <div className="bg-softBlue bg-[#CBDEEF] break-words mt-[8rem] flex justify-between items-center pt-[3rem] pb-[10rem]">
+        <div className="text-[4rem]">
+          <h1>{title}</h1>
+        </div>
+        <div className="relative">
+          <img
+            className="w-[50px] cursor-pointer"
+            src={threedots}
+            alt="Options"
+            onClick={handleThreedotsClick}
+          />
 
-          {buttonChange ? (
-            <button className="text-[1.5rem]">
-              <img className=" w-[100px] rounded-[50%]  " src={corect} alt="" />
-              <img
-                className=" w-[100px] rounded-[50%]  "
-                onClick={handleEdit}
-                src={deletes}
-                alt=""
-              />
-            </button>
-          ) : (
-            <p onClick={handleEdit} className=" cursor-pointer">
-              <img className="w-[50px] " src={threedot} alt="" />
-            </p>
+          {showBox && (
+            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg">
+              <button
+                className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                onClick={handleChangeClick}
+              >
+                Change
+              </button>
+            </div>
           )}
         </div>
-      </form>
+      </div>
+
+      {showOverlay && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-8 rounded-lg">
+            <input
+              type="text"
+              placeholder="Enter new title"
+              className="w-full p-2 border border-gray-300 rounded-lg"
+            />
+            <div className="flex justify-between ">
+              <button
+                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
+                onClick={handleCloseOverlay}
+              >
+                Close
+              </button>
+              <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg">
+                edit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
