@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useGetbanner } from "../../../hooks/useGetBanner";
 import threedots from "/public/imgs/7066144.png";
-import { UpdateBanner } from "../../../services/homeServices";
+import useUpdateBanner from "../../../hooks/useUpDataBaner";
 
 export default function Banner() {
   const { data, error, isError, isLoading } = useGetbanner();
@@ -9,7 +9,7 @@ export default function Banner() {
   const [showBox, setShowBox] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
   const [editError, setEditError] = useState("");
-  const updateTitle = UpdateBanner();
+  const updateTitle = useUpdateBanner();
 
   const handleUpdateDescription = (e) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ export default function Banner() {
       updateTitle({ id: id, title: text });
     }
   };
-
+  console.log(handleUpdateDescription);
   const handleThreedotsClick = () => {
     setShowBox((prev) => !prev);
   };

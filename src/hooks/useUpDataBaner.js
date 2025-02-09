@@ -14,7 +14,7 @@ const useUpdateBanner = () => {
     },
   });
 
-  return { updateTitle };
+  return updateTitle;
 };
 
 export default useUpdateBanner;
