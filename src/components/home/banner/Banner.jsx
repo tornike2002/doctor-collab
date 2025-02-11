@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useGetbanner } from "../../../hooks/useGetBanner";
 import threedots from "/public/imgs/7066144.png";
 import useUpdateBanner from "../../../hooks/useUpDataBaner";
+import BannerSkeleton from "./BannerSkeleton";
 import ShowChange from "./ShowChange";
 import TextTitle from "./TextTitle";
 export default function Banner() {
@@ -45,18 +46,21 @@ export default function Banner() {
     setSelectedId(null);
   };
 
+  // add loader
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <BannerSkeleton />;
   }
 
   if (isError) {
     return <div>Error: {error.message}</div>;
   }
 
-  if (!data || !data.title || data.title.length === 0) {
-    return <div>No data available</div>;
-  }
+  // if (!data || !data.title || data.title.length === 0) {
+  //   return <div>No data available</div>;
+  // }
 
+  // remove this
   return (
     <div>
       {data.title.map((item) => (
