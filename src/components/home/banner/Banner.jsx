@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useGetbanner } from "../../../hooks/useGetBanner";
 import threedots from "/public/imgs/7066144.png";
 import useUpdateBanner from "../../../hooks/useUpDataBaner";
-
+import ShowChange from "./ShowChange";
+import TextTitle from "./TextTitle";
 export default function Banner() {
   const { data, error, isError, isLoading } = useGetbanner();
 
@@ -60,64 +61,24 @@ export default function Banner() {
     <div>
       {data.title.map((item) => (
         <div key={item.id}>
-          <div className="bg-softBlue bg-[#CBDEEF] break-words mt-[8rem] flex justify-between items-center lg:py-[3.81rem] py-[1.81rem]  lg:px-[3.81rem] px-[1.81rem]">
-            <div className="text-[4rem]">
-              <h1 className="font-extrabold text-[25px] lg:text-[80%] w-[200px] lg:w-[700px]">
-                {item.title}
-              </h1>
-            </div>
-            <div className="relative">
-              <img
-                className="w-[50px] cursor-pointer"
-                src={threedots}
-                alt="Options"
-                onClick={handleThreedotsClick}
-              />
-              {showBox && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg">
-                  <button
-                    className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => handleChangeClick(item.id)}
-                  >
-                    Change
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
+          <TextTitle
+            handleChangeClick={handleChangeClick}
+            handleThreedotsClick={handleThreedotsClick}
+            threedots={threedots}
+            title={item.title}
+            showBox={showBox}
+            id={item.id}
+          />
 
-          {showOverlay && selectedId === item.id && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-              <form
-                onSubmit={(e) => handleUpdateDescription(e, item.id)}
-                className="bg-white w-[400px] p-8 rounded-lg"
-              >
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="Enter new title"
-                  className="w-full p-2 border border-gray-300 rounded-lg"
-                  defaultValue={item.title}
-                />
-                {editError && <p className="text-red-500">{editError}</p>}
-                <div className="flex mt-[10px] justify-between">
-                  <button
-                    type="button"
-                    className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
-                    onClick={handleCloseOverlay}
-                  >
-                    Close
-                  </button>
-                  <button
-                    type="submit"
-                    className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
-                  >
-                    Edit
-                  </button>
-                </div>
-              </form>
-            </div>
-          )}
+          <ShowChange
+            selectedId={selectedId}
+            showOverlay={showOverlay}
+            id={item.id}
+            editError={editError}
+            handleUpdateDescription={handleUpdateDescription}
+            handleCloseOverlay={handleCloseOverlay}
+            title={item.title}
+          />
         </div>
       ))}
     </div>
