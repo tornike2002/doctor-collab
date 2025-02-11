@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useGetbanner } from "../../../hooks/useGetBanner";
 import threedots from "/public/imgs/7066144.png";
 import useUpdateBanner from "../../../hooks/useUpDataBaner";
+import BannerSkeleton from "./BannerSkeleton";
 import ShowChange from "./ShowChange";
 import TextTitle from "./TextTitle";
 import BannerSkeleton from "./BannerSkeleton";
@@ -47,19 +48,11 @@ export default function Banner() {
   };
 
   if (isLoading) {
-    return (
-      <div>
-        <BannerSkeleton />
-      </div>
-    );
+    return <BannerSkeleton />;
   }
 
   if (isError) {
     return <div>Error: {error.message}</div>;
-  }
-
-  if (!data || !data.title || data.title.length === 0) {
-    return <div>No data available</div>;
   }
 
   return (
