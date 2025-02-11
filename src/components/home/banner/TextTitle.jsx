@@ -9,9 +9,9 @@ export default function TextTitle({
   id,
 }) {
   return (
-    <div className="bg-softBlue bg-[#CBDEEF] break-words mt-[8rem] flex justify-between items-center lg:py-[4.81rem] py-[1.81rem]  lg:px-[3.81rem] px-[1.81rem]">
+    <div className="bg-softBlue bg-[#CBDEEF] break-words mt-[8rem] flex justify-between items-center lg:py-[4.81rem] py-[2.81rem]  lg:px-[3.81rem] px-[1.81rem]">
       <div className="text-[4rem]">
-        <h1 className="font-extrabold text-[#25125d] text-[25px] lg:text-[80%] w-[200px] lg:w-[700px]">
+        <h1 className="font-extrabold text-[#1A1B1D] text-[25px] lg:text-[80%] w-[200px] lg:w-[700px]">
           {title}
         </h1>
       </div>
@@ -28,7 +28,7 @@ export default function TextTitle({
               className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               onClick={() => handleChangeClick(id)}
             >
-              Change
+              Edit Text
             </button>
           </div>
         )}

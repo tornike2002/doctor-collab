@@ -4,6 +4,7 @@ import threedots from "/public/imgs/7066144.png";
 import useUpdateBanner from "../../../hooks/useUpDataBaner";
 import ShowChange from "./ShowChange";
 import TextTitle from "./TextTitle";
+import BannerSkeleton from "./BannerSkeleton";
 export default function Banner() {
   const { data, error, isError, isLoading } = useGetbanner();
 
@@ -46,7 +47,11 @@ export default function Banner() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <BannerSkeleton />
+      </div>
+    );
   }
 
   if (isError) {
