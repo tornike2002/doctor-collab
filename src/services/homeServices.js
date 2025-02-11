@@ -5,11 +5,11 @@ export const apiGetBanner = async () => {
   return { title, error };
 };
 
-export const UpdateBanner = async (id, desc) => {
-  let { data: title, error } = await supabase
+export const UpdateBanner = async ({ id, title }) => {
+  let { data, error } = await supabase
     .from("banner")
-    .update({ title: desc })
+    .update({ title: title })
     .eq("id", id);
   if (error) throw new Error(error.message);
-  return { title, error };
+  return { data, error };
 };

@@ -1,20 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { UpdateBanner } from "../services/homeServices";
+import { toast } from "react-toastify";
 
 const useUpdateBanner = () => {
   const queryClient = useQueryClient();
-
-  const { mutateAsync: updateTitle } = useMutation({
-    mutationFn: ({ id, title }) => UpdateBanner({ id, title }),
+  const mutation = useMutation({
+    mutationFn: ({ title, id }) => UpdateBanner({ title, id }),
     onSuccess: () => {
+      toast.success("banner update successfully");
       queryClient.invalidateQueries(["banner"]);
     },
-    onError: (error) => {
-      console.error("Error updating banner:", error);
+    onError(error) {
+      toast.error(error.message);
     },
   });
-
-  return updateTitle;
+  return mutation;
 };
 
 export default useUpdateBanner;
