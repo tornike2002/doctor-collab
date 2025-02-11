@@ -25,6 +25,7 @@ export default function Banner() {
     } else {
       setEditError("");
       updateTitle({ title: text, id: id });
+      setShowOverlay(false);
     }
   };
 
@@ -59,9 +60,11 @@ export default function Banner() {
     <div>
       {data.title.map((item) => (
         <div key={item.id}>
-          <div className="bg-softBlue bg-[#CBDEEF] break-words mt-[8rem] flex justify-between items-center py-[3.81rem] px-[3.81rem]">
+          <div className="bg-softBlue bg-[#CBDEEF] break-words mt-[8rem] flex justify-between items-center lg:py-[3.81rem] py-[1.81rem]  lg:px-[3.81rem] px-[1.81rem]">
             <div className="text-[4rem]">
-              <h1 className="font-extrabold">{item.title}</h1>
+              <h1 className="font-extrabold text-[25px] lg:text-[80%] w-[200px] lg:w-[700px]">
+                {item.title}
+              </h1>
             </div>
             <div className="relative">
               <img

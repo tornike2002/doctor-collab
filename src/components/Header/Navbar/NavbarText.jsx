@@ -35,7 +35,7 @@ export default function NavbarText({ links }) {
       </div>
       {/* duration-500  */}
       <ul
-        className={`fixed right-0 top-[100px] h-full w-full bg-[#004682] flex flex-col items-center gap-4 p-5  ${
+        className={`fixed right-0  z-10 top-[100px] h-full w-full bg-[#004682] flex flex-col items-center gap-4 p-5  ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } lg:relative lg:translate-x-0 lg:flex-row lg:w-auto lg:bg-transparent lg:top-0`}
       >
