@@ -5,7 +5,7 @@ import useUpdateBanner from "../../../hooks/useUpDataBaner";
 import BannerSkeleton from "./BannerSkeleton";
 import ShowChange from "./ShowChange";
 import TextTitle from "./TextTitle";
-import BannerSkeleton from "./BannerSkeleton";
+
 export default function Banner() {
   const { data, error, isError, isLoading } = useGetbanner();
 
