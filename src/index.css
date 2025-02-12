@@ -39,3 +39,7 @@
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-in-out forwards;
 }
+
+body {
+  background-color: #59749a;
+}
