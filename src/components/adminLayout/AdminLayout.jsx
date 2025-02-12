@@ -1,4 +1,5 @@
 import MainContentWrapper from "../../ui/MainContentWrapper";
+import Footer from "../Footer/Footer";
 import Header from "../Header/header";
 
 const AdminLayout = ({ children }) => {
@@ -10,7 +11,8 @@ const AdminLayout = ({ children }) => {
 
         <Header />
         <main>{children}</main>
-        {/* footer here */}
+
+        <Footer />
       </MainContentWrapper>
     </div>
   );
