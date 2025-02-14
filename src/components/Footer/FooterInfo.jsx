@@ -2,8 +2,8 @@ import React from "react";
 
 export default function FooterInfo() {
   return (
-    <div className="max-w-[500px] text-gray-700 space-y-6">
-      <p className="text-lg leading-relaxed">
+    <div className="max-w-[500px] text-gray-900 space-y-6">
+      <p className="text-lg  leading-relaxed">
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea

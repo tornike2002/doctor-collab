@@ -66,7 +66,7 @@ export default function Contact() {
             type="email"
             name="user_email"
             required
-            className={`h-[4.6rem] max-w-[30rem] rounded-[0.375rem] pl-1 border ${
+            className={`h-[4.6rem]  lg:w-[30rem] rounded-[0.375rem] pl-1 border ${
               errorEmail ? "border-red-500 border-[2px]" : ""
             }`}
           />
@@ -81,7 +81,7 @@ export default function Contact() {
             placeholder="Write your message"
             name="message"
             required
-            className={`rounded-[0.375rem] max-w-[30rem] pl-1 pt-4 border ${
+            className={`rounded-[0.375rem] lg:w-[30rem] pl-1 pt-4 border ${
               messageError ? "border-red-500 border-[2px]" : ""
             }`}
           />
