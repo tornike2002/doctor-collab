@@ -35,9 +35,12 @@ export default function Contact() {
 
     setLoading(true);
     emailjs
-      .sendForm("service_ry9628q", "template_cqioc5o", e.target, {
-        publicKey: "BAv7Z_KN3xf9qrXNd",
-      })
+      .sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID, 
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID, 
+        e.target, 
+        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
+      )
       .then(
         () => {
           toast.success("Message sent successfully!");
