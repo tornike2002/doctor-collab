@@ -1,4 +1,3 @@
-import React from "react";
 import Modal from "../../../Modal";
 
 export default function ShowChange({
@@ -10,7 +9,6 @@ export default function ShowChange({
   editError,
   handleCloseOverlay,
 }) {
-  // className="fixed inset-0 bg-black bg-opacity-50 px-[20px] flex justify-center items-center"
   return (
     <>
       {showOverlay && selectedId === id && (
@@ -28,17 +26,18 @@ export default function ShowChange({
                 defaultValue={title}
               />
               {editError && <p className="text-red-500">{editError}</p>}
-              <div className="flex mt-[10px] justify-between">
+
+              <div className="flex mt-4 justify-between">
                 <button
                   type="button"
-                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
+                  className="px-4 py-2 bg-gray-400 text-white rounded-lg"
                   onClick={handleCloseOverlay}
                 >
                   Close
                 </button>
                 <button
                   type="submit"
-                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg"
                 >
                   Edit
                 </button>
