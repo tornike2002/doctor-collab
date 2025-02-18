@@ -1,18 +1,27 @@
-import { Children, useEffect, useRef } from "react";
-
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-export default function Modal() {
+
+function Modal({ children }) {
   const elRef = useRef(null);
 
-  if (!elRef.current) {
-    elRef.current = document.createElement("div");
-  }
-
   useEffect(() => {
+    if (!elRef.current) {
+      elRef.current = document.createElement("div");
+    }
+
     const modalRoot = document.getElementById("modal");
+    if (!modalRoot) return;
+
     modalRoot.appendChild(elRef.current);
 
-    return () => modalRoot.removeChild(elRef.current);
+    return () => {
+      modalRoot.removeChild(elRef.current);
+    };
   }, []);
-  return createPortal(<div>{Children}</div>, elRef.current);
+
+  return elRef.current
+    ? createPortal(<div className=" bg-black ">{children}</div>, elRef.current)
+    : null;
 }
+
+export default Modal;
