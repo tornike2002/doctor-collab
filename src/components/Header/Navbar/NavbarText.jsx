@@ -8,7 +8,7 @@ export default function NavbarText({ links }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const onSubmit = async () => {
-    sessionStorage.removeItem("adminLogin", true);
+    localStorage.removeItem("user");
     navigate("/login");
   };
 
