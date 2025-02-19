@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useGetbanner } from "../../../hooks/useGetBanner";
-import threedots from "/public/imgs/7066144.png";
+import threedots from "/imgs/7066144.png";
 import useUpdateBanner from "../../../hooks/useUpDataBaner";
 import BannerSkeleton from "./BannerSkeleton";
 import ShowChange from "./ShowChange";
