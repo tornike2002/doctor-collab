@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Hamburger from "hamburger-react";
 import { useNavigate } from "react-router-dom";
-import Header from "../header";
+
 export default function NavbarText({ links }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +23,15 @@ export default function NavbarText({ links }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => document.body.classList.remove("overflow-hidden");
+  }, [isOpen]);
+
   return (
     <div>
       <div className="lg:hidden z-50 relative">
@@ -33,9 +42,9 @@ export default function NavbarText({ links }) {
           color="white"
         />
       </div>
-      {/* duration-500  */}
+
       <ul
-        className={`fixed right-0  z-10 top-[100px] h-full w-full bg-[#004682] flex flex-col items-center gap-4 p-5  ${
+        className={`fixed right-0 z-10 top-[100px] h-full w-full bg-[#004682] flex flex-col items-center gap-4 p-5 transition-transform duration-500 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } lg:relative lg:translate-x-0 lg:flex-row lg:w-auto lg:bg-transparent lg:top-0`}
       >
