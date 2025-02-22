@@ -1,12 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-
 import { apiGetDoctorBio } from "../services/homeServices";
 
-function useGetDoctorBio() {
+export const useGetDoctorBio = () => {
   return useQuery({
+    queryKey: ["doctor_info"],
     queryFn: apiGetDoctorBio,
-    queryKey: ["doctorBio"],
   });
-}
-
-export default useGetDoctorBio;
+};

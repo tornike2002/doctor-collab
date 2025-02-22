@@ -1,64 +1,47 @@
 import { useState } from "react";
-
-// import DoctorBioContent from "./DoctorBioContent";
-// import DoctorBioSkeleton from "./DoctorBioSkeleton";
-import useGetDoctorBio from "../../hooks/useGetDoctorBio";
-import useGetDoctorIm from "../../hooks/useGetDoctorIm";
+import { useGetDoctorIm } from "../../hooks/useGetDoctorIm";
+import { useGetDoctorBio } from "../../hooks/useGetDoctorBio";
+import Dcotorgrid from "/public/imgs/Dot Grid.png";
 
 function DoctorBio() {
   const [isOpen, setIsOpen] = useState(false);
-  const { data, isLoading, isError } = useGetDoctorBio();
-  const {
-    data: doctorImage,
-    isLoading: ImageLoading,
-    isError: ImageError,
-  } = useGetDoctorIm();
+  const { data: doctorimg, isLoading, isError } = useGetDoctorIm();
+  // const { data: doctorinfo } = useGetDoctorBio();
+  // console.log(doctorinfo);
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
 
-  // this function opens and closes toggle menu
-
-  function handleToggle() {
-    setIsOpen((prev) => !prev);
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
-  if (isLoading || ImageLoading) return <DoctorBioSkeleton />;
-  if (isError || ImageError) return <div>Error...</div>;
+
+  if (isError) {
+    return <div>Error loading doctor information.</div>;
+  }
 
   return (
     <div className="grid grid-cols-1 pb-10 pt-10">
-      {doctorImage?.map((asset) => (
-        <div
-          key={asset.id}
-          className="bg-pastelBlue w-[275px] max-w-full min-h-[289px] justify-self-end relative  sm:w-[498px] sm:min-h-[521px]
-         md:w-[573px] md:min-h-[631px] lg:w-[725px] lg:min-h-[750px]"
-        >
-          <div>
+      {doctorimg.img.map((doctor) => (
+        <div key={doctor.id} className=" flex  mt-[100px] ">
+          {/* Image with half overlay */}
+          <div className="relative w-[355px] h-[525px] flex justify-center">
             <img
-              src="/images/dots.png"
-              alt="dots"
-              onClick={handleToggle}
-              className="w-[25px] h-[25px] cursor-pointer absolute right-2 top-2"
+              src={doctor.img}
+              className=" top-[-50px] z-10 ml-[50%]  rounded-lg w-[275px] h-[358px] sm:w-[300px] sm:h-[459px] lg:w-[355px] lg:h-[425px]"
+              alt=""
             />
           </div>
-          <div>
-            <img
-              src={asset.middle_pic}
-              alt="doc"
-              className="absolute bg-no-repeat object-center object-cover -left-36 top-8 w-[172px] max-w-full h-[243px] rounded-lg hidden mediumSm:block
-             mediumSm:h-[220px] sm:w-[275px] sm:h-[358px] sm:top-20 md:w-[300px] md:h-[459px] md:-left-48 lg:w-[355px] lg:min-h-[525px]"
-            />
-          </div>
-          <div className="flex justify-center items-center h-full pl-5 md:pl-20 pr-10">
-            {data.map((info) => (
-              <div key={info.id}>
-                {/* <DoctorBioContent
-                  assetId={asset.id}
-                  infoId={info.id}
-                  isOpen={isOpen}
-                  fullname={info.fullname}
-                  status={info.status}
-                  degree={info.degree}
-                /> */}
+
+          {/* Doctor Bio Section */}
+          <div className="relative z-0 flex w-[600px] min-h-[200px] justify-center items-center px-5 md:px-20 bg-[#CCDCF3] mt-[-80px]">
+            {/* {doctorinfo.full_name.map((index) => (
+              <div>
+                <h1>{index.full_name}</h1>
               </div>
-            ))}
+            ))} */}
+            <h1 className="text-[100px]">{doctor.full_name}</h1>
+            <h1 className="text-[20px]">{doctor.job_description}</h1>
           </div>
         </div>
       ))}

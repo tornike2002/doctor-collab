@@ -1,12 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-
 import { apiGetDoctorBioImage } from "../services/homeServices";
 
-function useGetDoctorIm() {
+export const useGetDoctorIm = () => {
   return useQuery({
     queryFn: apiGetDoctorBioImage,
-    queryKey: ["doctorImage"],
+    queryKey: ["doctor_info"],
   });
-}
-
-export default useGetDoctorIm;
+};

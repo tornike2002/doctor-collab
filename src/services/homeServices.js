@@ -14,14 +14,14 @@ export const UpdateBanner = async ({ id, title }) => {
   return { data, error };
 };
 
-export const apiGetDoctorBio = async function apiGetDoctorBio() {
-  const { data, error } = await supabase.from("doctor_name").select("*");
-  if (error) throw new Error(error.message);
-  return data;
+export const apiGetDoctorBio = async () => {
+  let { data: full_name, error } = await supabase
+    .from("doctor_info")
+    .select("*");
+  return { full_name, error };
 };
 
-export const apiGetDoctorBioImage = async function apiGetDoctorBioImage() {
-  const { data, error } = await supabase.from("img").select("*");
-  if (error) throw new Error(error.message);
-  return data;
+export const apiGetDoctorBioImage = async () => {
+  let { data: img, error } = await supabase.from("doctor_info").select("*");
+  return { img, error };
 };
