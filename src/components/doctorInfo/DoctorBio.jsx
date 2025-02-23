@@ -32,6 +32,7 @@ function DoctorBio() {
             deletes={deletes}
             threedot={threedot}
             jobcode={doctor.job_code}
+            id={doctor.id}
           />
         </div>
       ))}

@@ -23,14 +23,18 @@ export const apiGetDoctorBio = async () => {
 
 export const apiUpdateDoctorBio = async function apiUpdateDoctorBio({
   full_name,
-  status,
-  degree,
+  job_description,
+  job_code,
   id,
 }) {
   const { data: doctorBio, error } = await supabase
-    .from("doctor_name")
-    .update({ full_name: full_name, status: status, degree: degree })
+    .from("doctor_info")
+    .update({
+      full_name: full_name,
+      job_description: job_description,
+      job_code: job_code,
+    })
     .eq("id", id);
-  if (error) throw error;
-  return doctorBio;
+  if (error) throw new Error(error.message);
+  return { doctorBio, error };
 };
