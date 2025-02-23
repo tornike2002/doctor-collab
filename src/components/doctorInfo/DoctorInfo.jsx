@@ -15,12 +15,13 @@ export default function DoctorInfo({
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState(fullname);
+  const [jobcodes, setJobCode] = useState(jobcode);
   const [jobDesc, setJobDesc] = useState(jobdescription);
   const [image, setImage] = useState(img);
   const { mutate: updateDoctorBios } = useUpDoctorBio();
 
   const handleFormSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault();
 
     const formData = new FormData(e.target);
 
@@ -43,11 +44,13 @@ export default function DoctorInfo({
         full_name: full_name,
         job_description: job_description,
         job_code: job_code,
+        img: image,
       });
-      setIsModalOpen(false); // Close the modal after submission
+      setIsModalOpen(false);
     }
   };
 
+  const middle_pic = `https://secchefzcjhlryqhjkvm.supabase.co/storage/v1/s3/doctor_storage`;
   return (
     <div>
       <div className="flex mt-[100px]">
@@ -70,7 +73,7 @@ export default function DoctorInfo({
             <h1 className="lg:text-[35px] text-[20px] text-[#267CC5]">
               {jobDesc}
             </h1>
-            <h1>{jobcode}</h1>
+            <h1>{jobcodes}</h1>
           </div>
         </div>
       </div>
@@ -79,13 +82,14 @@ export default function DoctorInfo({
           deletes={deletes}
           setName={setName}
           setJobDesc={setJobDesc}
+          setJobCode={setJobCode} // სწორად გადავცემ setJobCode-ს
           image={image}
           setImage={setImage}
           setIsModalOpen={setIsModalOpen}
           name={name}
           jobDesc={jobDesc}
-          jobcode={jobcode}
-          handleFormSubmit={handleFormSubmit}
+          jobcode={jobcodes} // აქაც jobcodes უნდა იყოს, რომ input-ში სწორად გამოჩნდეს
+          handleFormSubmit={(e) => handleFormSubmit(e, image)}
         />
       )}
     </div>

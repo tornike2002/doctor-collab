@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "../Modal/Modal";
 
 export default function DoctorUpForm({
@@ -8,19 +8,27 @@ export default function DoctorUpForm({
   setJobCode,
   jobDesc,
   image,
+  setImage,
   name,
   jobcode,
   handleFormSubmit,
 }) {
-  const handleSave = (e) => {
-    e.preventDefault();
-    handleFormSubmit(e);
+  const middle_pic = `https://secchefzcjhlryqhjkvm.supabase.co/storage/v1/s3/doctor_storage`;
+  const [imagePreview, setImagePreview] = useState(image);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setImagePreview(imageUrl);
+      setImage(middle_pic + "/" + file.name);
+    }
   };
 
   return (
     <Modal>
       <form
-        onSubmit={handleSave}
+        onSubmit={handleFormSubmit}
         className="bg-white z-[-1px] p-6 rounded-lg w-full max-w-md"
       >
         <h2 className="text-xl font-bold mb-4">Edit Doctor Info</h2>
@@ -55,8 +63,8 @@ export default function DoctorUpForm({
           <input
             type="text"
             name="job_code"
-            value={jobcode}
-            onChange={(e) => setJobCode(e.target.value)}
+            value={jobcode} // აქაც jobcode-ს ვიყენებთ
+            onChange={(e) => setJobCode(e.target.value)} // ასე მოხდება job_code-ის განახლება
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
@@ -64,9 +72,14 @@ export default function DoctorUpForm({
           <label className="block text-sm font-medium text-gray-700">
             Image
           </label>
-          {image && (
+          <input
+            type="file"
+            onChange={handleImageChange}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+          {imagePreview && (
             <img
-              src={image}
+              src={imagePreview}
               alt="Preview"
               className="mt-2 w-20 h-20 rounded-lg"
             />

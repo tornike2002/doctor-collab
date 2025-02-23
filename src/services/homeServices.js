@@ -25,6 +25,7 @@ export const apiUpdateDoctorBio = async function apiUpdateDoctorBio({
   full_name,
   job_description,
   job_code,
+  img,
   id,
 }) {
   const { data: doctorBio, error } = await supabase
@@ -33,6 +34,7 @@ export const apiUpdateDoctorBio = async function apiUpdateDoctorBio({
       full_name: full_name,
       job_description: job_description,
       job_code: job_code,
+      img: img,
     })
     .eq("id", id);
   if (error) throw new Error(error.message);
