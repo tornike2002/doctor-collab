@@ -4,6 +4,7 @@ import { useGetDoctorBio } from "../../hooks/useGetDoctorBio";
 import DoctorInfo from "./DoctorInfo";
 import deletes from "/imgs/delete_sign-256.png";
 import threedot from "/imgs/7066144.png";
+import DoctorBioSkeleton from "./DoctorBioSkeleton";
 function DoctorBio() {
   const [isOpen, setIsOpen] = useState(false);
   const { data: doctorimg, isLoading, isError } = useGetDoctorBio();
@@ -13,7 +14,7 @@ function DoctorBio() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <DoctorBioSkeleton />;
   }
 
   if (isError) {

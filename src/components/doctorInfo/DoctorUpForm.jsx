@@ -63,8 +63,8 @@ export default function DoctorUpForm({
           <input
             type="text"
             name="job_code"
-            value={jobcode} // აქაც jobcode-ს ვიყენებთ
-            onChange={(e) => setJobCode(e.target.value)} // ასე მოხდება job_code-ის განახლება
+            value={jobcode}
+            onChange={(e) => setJobCode(e.target.value)}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>

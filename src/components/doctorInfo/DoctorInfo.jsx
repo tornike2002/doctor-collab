@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import DoctorUpForm from "./DoctorUpForm";
 import useUpDoctorBio from "../../hooks/useUpDoctorBio";
 import { toast } from "react-toastify";
-import { data } from "react-router-dom";
 
 export default function DoctorInfo({
   img,
@@ -44,13 +43,12 @@ export default function DoctorInfo({
         full_name: full_name,
         job_description: job_description,
         job_code: job_code,
-        img: image,
+        img: img,
       });
       setIsModalOpen(false);
     }
   };
 
-  const middle_pic = `https://secchefzcjhlryqhjkvm.supabase.co/storage/v1/s3/doctor_storage`;
   return (
     <div>
       <div className="flex mt-[100px]">
@@ -82,13 +80,13 @@ export default function DoctorInfo({
           deletes={deletes}
           setName={setName}
           setJobDesc={setJobDesc}
-          setJobCode={setJobCode} // სწორად გადავცემ setJobCode-ს
+          setJobCode={setJobCode}
           image={image}
           setImage={setImage}
           setIsModalOpen={setIsModalOpen}
           name={name}
           jobDesc={jobDesc}
-          jobcode={jobcodes} // აქაც jobcodes უნდა იყოს, რომ input-ში სწორად გამოჩნდეს
+          jobcode={jobcodes}
           handleFormSubmit={(e) => handleFormSubmit(e, image)}
         />
       )}
