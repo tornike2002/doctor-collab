@@ -20,7 +20,7 @@ function Modal({ children }) {
   }, []);
 
   return createPortal(
-    <div className="fixed z-10 inset-0 bg-black bg-opacity-50 flex justify-center items-center px-5">
+    <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex justify-center items-center px-5">
       {children}
     </div>,
     elRef.current

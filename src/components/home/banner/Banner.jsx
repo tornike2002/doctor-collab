@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useGetbanner } from "../../../hooks/useGetBanner";
 import threedots from "/imgs/7066144.png";
-import useUpdateBanner from "../../../hooks/useUpDataBaner";
+import useUpdateBanner from "../../../hooks/useUpdateBanner";
 import BannerSkeleton from "./BannerSkeleton";
 import ShowChange from "./ShowChange";
 import TextTitle from "./TextTitle";

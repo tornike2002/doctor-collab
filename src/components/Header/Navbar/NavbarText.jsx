@@ -33,7 +33,7 @@ export default function NavbarText({ links }) {
   }, [isOpen]);
 
   return (
-    <div>
+    <div className="z-30">
       <div className="lg:hidden z-50 relative">
         <Hamburger
           toggled={isOpen}

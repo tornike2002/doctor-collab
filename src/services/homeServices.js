@@ -21,7 +21,16 @@ export const apiGetDoctorBio = async () => {
   return { full_name, error };
 };
 
-export const apiGetDoctorBioImage = async () => {
-  let { data: img, error } = await supabase.from("doctor_info").select("*");
-  return { img, error };
+export const apiUpdateDoctorBio = async function apiUpdateDoctorBio({
+  full_name,
+  status,
+  degree,
+  id,
+}) {
+  const { data: doctorBio, error } = await supabase
+    .from("doctor_name")
+    .update({ full_name: full_name, status: status, degree: degree })
+    .eq("id", id);
+  if (error) throw error;
+  return doctorBio;
 };
