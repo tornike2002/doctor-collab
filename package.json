@@ -24,6 +24,7 @@
     "react-router-dom": "^7.1.5",
     "react-toastify": "^11.0.3",
     "swiper": "^11.2.2",
+    "uuid": "^11.1.0",
     "yup": "^1.6.1"
   },
   "devDependencies": {

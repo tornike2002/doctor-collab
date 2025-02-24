@@ -1,37 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "../Modal/Modal";
 
 export default function DoctorUpForm({
   setIsModalOpen,
-  setName,
-  setJobDesc,
-  setJobCode,
-  jobDesc,
-  image,
-  setImage,
-  name,
-  jobcode,
+  doctorData,
+  setDoctorData,
   handleFormSubmit,
+  imagePreview,
+  fileRef,
 }) {
-  const middle_pic = `https://secchefzcjhlryqhjkvm.supabase.co/storage/v1/s3/doctor_storage`;
-  const [imagePreview, setImagePreview] = useState(image);
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setImagePreview(imageUrl);
-      setImage(middle_pic + "/" + file.name);
-    }
-  };
-
   return (
     <Modal>
       <form
         onSubmit={handleFormSubmit}
-        className="bg-white z-[-1px] p-6 rounded-lg w-full max-w-md"
+        className="bg-white p-6 rounded-lg w-full max-w-md"
       >
         <h2 className="text-xl font-bold mb-4">Edit Doctor Info</h2>
+
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Full Name
@@ -39,11 +24,14 @@ export default function DoctorUpForm({
           <input
             type="text"
             name="full_name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            value={doctorData.name}
+            onChange={(e) =>
+              setDoctorData((prev) => ({ ...prev, name: e.target.value }))
+            }
+            className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500"
           />
         </div>
+
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Job Description
@@ -51,11 +39,14 @@ export default function DoctorUpForm({
           <input
             type="text"
             name="job_description"
-            value={jobDesc}
-            onChange={(e) => setJobDesc(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            value={doctorData.jobDesc}
+            onChange={(e) =>
+              setDoctorData((prev) => ({ ...prev, jobDesc: e.target.value }))
+            }
+            className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500"
           />
         </div>
+
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Job Code
@@ -63,19 +54,23 @@ export default function DoctorUpForm({
           <input
             type="text"
             name="job_code"
-            value={jobcode}
-            onChange={(e) => setJobCode(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            value={doctorData.jobCode}
+            onChange={(e) =>
+              setDoctorData((prev) => ({ ...prev, jobCode: e.target.value }))
+            }
+            className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500"
           />
         </div>
+
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Image
           </label>
           <input
             type="file"
-            onChange={handleImageChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            accept="image/*"
+            ref={fileRef}
+            className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm"
           />
           {imagePreview && (
             <img
@@ -85,17 +80,18 @@ export default function DoctorUpForm({
             />
           )}
         </div>
+
         <div className="flex justify-end">
           <button
             type="button"
             onClick={() => setIsModalOpen(false)}
-            className="mr-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
+            className="mr-2 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+            className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
           >
             Save
           </button>
