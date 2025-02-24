@@ -67,7 +67,9 @@ export default function DoctorInfo({
             alt=""
           />
           <div className="flex flex-col items-center justify-center h-full">
-            <h1 className="lg:text-[60px] text-[50px] font-sans">{name}</h1>
+            <h1 className="lg:text-[60px] text-[30px] font-extrabold">
+              {name}
+            </h1>
             <h1 className="lg:text-[35px] text-[20px] text-[#267CC5]">
               {jobDesc}
             </h1>
@@ -81,7 +83,7 @@ export default function DoctorInfo({
           setName={setName}
           setJobDesc={setJobDesc}
           setJobCode={setJobCode}
-          image={image}
+          image={img}
           setImage={setImage}
           setIsModalOpen={setIsModalOpen}
           name={name}
