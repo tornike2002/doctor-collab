@@ -87,7 +87,7 @@ export default function DoctorInfo({
 
   return (
     <div>
-      <div className="flex mt-[100px] md:ml-[300px] ">
+      <div className="flex mt-[100px] justify-end ">
         <div className="relative w-[355px] h-[525px] flex justify-center">
           <img
             src={doctorData.img}
