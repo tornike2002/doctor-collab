@@ -1,6 +1,5 @@
 import { useState } from "react";
-
-import { useGetDoctorBio } from "../../hooks/useGetDoctorBio";
+import { useGetDoctorBio } from "../../../hooks/useGetDoctorBio";
 import DoctorInfo from "./DoctorInfo";
 import deletes from "/imgs/delete_sign-256.png";
 import threedot from "/imgs/7066144.png";
@@ -27,12 +26,12 @@ function DoctorBio() {
         <div key={doctor.id}>
           <DoctorInfo
             img={doctor.img}
-            fullname={doctor.full_name}
-            jobdescription={doctor.job_description}
+            full_name={doctor.full_name}
+            job_description={doctor.job_description}
             handleToggle={handleToggle}
             deletes={deletes}
             threedot={threedot}
-            jobcode={doctor.job_code}
+            job_code={doctor.job_code}
             id={doctor.id}
           />
         </div>

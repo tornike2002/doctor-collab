@@ -1,16 +1,16 @@
 import React, { useState, useRef } from "react";
 import DoctorUpForm from "./DoctorUpForm";
-import useUpDoctorBio from "../../hooks/useUpDoctorBio";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-import supabase from "../../services/supabase";
+import supabase from "../../../services/supabase";
+import useUpDoctorBio from "../../../hooks/useUpDoctorBio";
 
 export default function DoctorInfo({
   img,
   id,
-  jobcode,
-  jobdescription,
-  fullname,
+  job_code,
+  job_description,
+  full_name,
   threedot,
 }) {
   const fileRef = useRef();
@@ -18,10 +18,10 @@ export default function DoctorInfo({
   const [imagePreview, setImagePreview] = useState(null);
   const [doctorData, setDoctorData] = useState({
     id,
-    name: fullname,
-    jobDesc: jobdescription,
-    jobCode: jobcode,
-    img: img,
+    img,
+    full_name,
+    job_description,
+    job_code,
   });
 
   const { mutate: updateDoctorBios } = useUpDoctorBio();
@@ -44,25 +44,18 @@ export default function DoctorInfo({
     const job_description = formData.get("job_description").trim();
     const job_code = formData.get("job_code").trim();
 
-    if (
-      !full_name ||
-      !job_description ||
-      !job_code ||
-      full_name.length < 3 ||
-      job_description.length < 5 ||
-      job_code.length < 5
-    ) {
-      return toast.error("Please fill all fields with at least 5 characters.");
+    if (full_name.length < 3 || full_name.length > 13) {
+      return toast.error("Name must be between 3 and 13 characters.");
     }
 
-    // შევამოწმოთ შეიცვალა თუ არა რაიმე მონაცემი
-    if (
-      full_name === doctorData.name &&
-      job_description === doctorData.jobDesc &&
-      job_code === doctorData.jobCode &&
-      !imgFile
-    ) {
-      return toast.error("No changes detected.");
+    if (job_description.length < 5 || job_description.length > 20) {
+      return toast.error(
+        "Job description must be between 5 and 20 characters."
+      );
+    }
+
+    if (job_code.length < 5 || job_code.length > 30) {
+      return toast.error("Job code must be between 5 and 30 characters.");
     }
 
     if (imgFile) {
@@ -90,7 +83,7 @@ export default function DoctorInfo({
     updateDoctorBios(updatedDoctorData);
 
     setIsModalOpen(false);
-    setDoctorData((prev) => ({ ...prev, ...updatedDoctorData }));
+    setDoctorData(updatedDoctorData);
     setImagePreview(imageUrl);
     toast.success("Doctor information updated successfully.");
   };
@@ -114,12 +107,12 @@ export default function DoctorInfo({
           />
           <div className="flex flex-col items-center justify-center h-full">
             <h1 className="lg:text-[60px] text-[30px] font-extrabold">
-              {doctorData.name}
+              {full_name}
             </h1>
             <h1 className="lg:text-[35px] text-[20px] text-[#267CC5]">
-              {doctorData.jobDesc}
+              {job_description}
             </h1>
-            <h1>{doctorData.jobCode}</h1>
+            <h1>{job_code}</h1>
           </div>
         </div>
       </div>
@@ -132,7 +125,10 @@ export default function DoctorInfo({
           handleImagePreview={handleImagePreview}
           imagePreview={imagePreview}
           fileRef={fileRef}
-          img={img}
+          img={doctorData.img}
+          job_description={doctorData.job_description}
+          full_name={doctorData.full_name}
+          job_code={doctorData.job_code}
         />
       )}
     </div>
