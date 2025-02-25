@@ -87,15 +87,15 @@ export default function DoctorInfo({
 
   return (
     <div>
-      <div className="flex mt-[100px]">
+      <div className="flex mt-[100px] md:ml-[300px] ">
         <div className="relative w-[355px] h-[525px] flex justify-center">
           <img
             src={doctorData.img}
-            className="top-[-50px] z-10 ml-[50%] rounded-lg w-[275px] h-[358px] sm:w-[300px] sm:h-[459px] lg:w-[355px] lg:h-[425px]"
+            className="top-[-50px] hidden md:block z-10 ml-[50%] rounded-lg w-[275px] h-[358px] sm:w-[300px] sm:h-[459px] lg:w-[355px] lg:h-[425px]"
             alt="Doctor"
           />
         </div>
-        <div className="relative z-1 flex flex-col items-center w-[600px] min-h-[200px] px-5 md:px-20 bg-[#CCDCF3] mt-[-80px]">
+        <div className="   relative z-1 flex flex-col text-center items-center w-[600px] min-h-[200px] px-5 md:px-20 bg-[#CCDCF3] mt-[-80px]">
           <img
             onClick={() => setIsModalOpen(true)}
             className="w-[2rem] absolute cursor-pointer top-[20px] right-[20px]"
@@ -122,6 +122,7 @@ export default function DoctorInfo({
           handleImagePreview={handleImagePreview}
           imagePreview={imagePreview}
           fileRef={fileRef}
+          img={img}
         />
       )}
     </div>

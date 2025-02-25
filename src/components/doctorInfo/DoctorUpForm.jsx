@@ -7,6 +7,7 @@ export default function DoctorUpForm({
   setDoctorData,
   handleFormSubmit,
   imagePreview,
+  img,
   fileRef,
 }) {
   return (
@@ -74,7 +75,7 @@ export default function DoctorUpForm({
           />
           {imagePreview && (
             <img
-              src={imagePreview}
+              src={img}
               alt="Preview"
               className="mt-2 w-20 h-20 rounded-lg"
             />
