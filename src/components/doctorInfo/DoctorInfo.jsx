@@ -55,6 +55,16 @@ export default function DoctorInfo({
       return toast.error("Please fill all fields with at least 5 characters.");
     }
 
+    // შევამოწმოთ შეიცვალა თუ არა რაიმე მონაცემი
+    if (
+      full_name === doctorData.name &&
+      job_description === doctorData.jobDesc &&
+      job_code === doctorData.jobCode &&
+      !imgFile
+    ) {
+      return toast.error("No changes detected.");
+    }
+
     if (imgFile) {
       const imageName = `${uuidv4()}_${imgFile.name}`;
       const { data: uploadData, error } = await supabase.storage
