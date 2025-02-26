@@ -4,14 +4,10 @@ import Modal from "../../Modal/Modal";
 export default function DoctorUpForm({
   setIsModalOpen,
   doctorData,
-  setDoctorData,
   handleFormSubmit,
+  handleImagePreview,
   imagePreview,
-
-  full_name,
   fileRef,
-  job_description,
-  job_code,
 }) {
   return (
     <Modal>
@@ -28,22 +24,9 @@ export default function DoctorUpForm({
           <input
             type="text"
             name="full_name"
-            value={full_name}
-            onChange={(e) => {
-              if (e.target.value.length <= 13) {
-                setDoctorData((prev) => ({
-                  ...prev,
-                  full_name: e.target.value,
-                }));
-              }
-            }}
+            defaultValue={doctorData.full_name}
             className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500"
           />
-          {full_name.length > 13 && (
-            <p className="text-red-500 text-sm">
-              Name must be less than 13 characters.
-            </p>
-          )}
         </div>
 
         <div className="mb-4">
@@ -53,22 +36,9 @@ export default function DoctorUpForm({
           <input
             type="text"
             name="job_description"
-            value={job_description}
-            onChange={(e) => {
-              if (e.target.value.length <= 20) {
-                setDoctorData((prev) => ({
-                  ...prev,
-                  job_description: e.target.value,
-                }));
-              }
-            }}
+            defaultValue={doctorData.job_description}
             className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500"
           />
-          {job_description.length > 20 && (
-            <p className="text-red-500 text-sm">
-              Job description must be less than 20 characters.
-            </p>
-          )}
         </div>
 
         <div className="mb-4">
@@ -78,22 +48,9 @@ export default function DoctorUpForm({
           <input
             type="text"
             name="job_code"
-            value={job_code}
-            onChange={(e) => {
-              if (e.target.value.length <= 30) {
-                setDoctorData((prev) => ({
-                  ...prev,
-                  job_code: e.target.value,
-                }));
-              }
-            }}
+            defaultValue={doctorData.job_code}
             className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500"
           />
-          {job_code.length > 30 && (
-            <p className="text-red-500 text-sm">
-              Job code must be less than 30 characters.
-            </p>
-          )}
         </div>
 
         <div className="mb-4">
@@ -104,6 +61,7 @@ export default function DoctorUpForm({
             type="file"
             accept="image/*"
             ref={fileRef}
+            onChange={handleImagePreview}
             className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm"
           />
           {imagePreview && (
