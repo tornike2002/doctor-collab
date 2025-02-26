@@ -40,6 +40,15 @@ export default function DoctorInfo({
       job_code: formData.get("job_code").trim(),
     };
 
+    // თუ მონაცემები იგივეა, ვაბრუნებთ ერორს
+    if (
+      updatedData.full_name === full_name &&
+      updatedData.job_description === job_description &&
+      updatedData.job_code === job_code &&
+      !imgFile
+    ) {
+      return toast.error("No changes detected.");
+    }
     if (updatedData.full_name.length < 3 || updatedData.full_name.length > 13) {
       return toast.error("Name must be between 3 and 13 characters.");
     }
@@ -75,7 +84,6 @@ export default function DoctorInfo({
     setImagePreview(imageUrl);
     toast.success("Doctor information updated successfully.");
   };
-
   return (
     <div>
       <div className="flex mt-[100px] justify-end ">

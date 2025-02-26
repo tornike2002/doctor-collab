@@ -24,6 +24,7 @@ export default function DoctorUpForm({
           <input
             type="text"
             name="full_name"
+            maxLength={15}
             defaultValue={doctorData.full_name}
             className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500"
           />
@@ -36,6 +37,7 @@ export default function DoctorUpForm({
           <input
             type="text"
             name="job_description"
+            maxLength={20}
             defaultValue={doctorData.job_description}
             className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500"
           />
@@ -48,6 +50,7 @@ export default function DoctorUpForm({
           <input
             type="text"
             name="job_code"
+            maxLength={30}
             defaultValue={doctorData.job_code}
             className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500"
           />
