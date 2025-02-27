@@ -41,7 +41,7 @@ export const apiUpdateDoctorBio = async function apiUpdateDoctorBio({
   return { doctorBio, error };
 };
 
-export const apiAddServices = async () => {
+export const apiGetServices = async () => {
   let { data: services, error } = await supabase.from("services").select("*");
   return { services, error };
 };
