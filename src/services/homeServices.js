@@ -40,3 +40,8 @@ export const apiUpdateDoctorBio = async function apiUpdateDoctorBio({
   if (error) throw new Error(error.message);
   return { doctorBio, error };
 };
+
+export const apiAddServices = async () => {
+  let { data: services, error } = await supabase.from("services").select("*");
+  return { services, error };
+};
