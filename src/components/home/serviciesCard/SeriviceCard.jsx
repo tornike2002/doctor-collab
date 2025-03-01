@@ -25,7 +25,7 @@ export default function SeriviceCard() {
           <h1>Edit</h1>
         </div>
       </div>
-      <ShowInputForm showInput={showInput} />{" "}
+      <ShowInputForm handleEditClick={handleEditClick} showInput={showInput} />{" "}
       <CardGrid services={data.services} isLoading={isLoading} />
     </div>
   );

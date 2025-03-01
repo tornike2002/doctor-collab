@@ -40,8 +40,13 @@ export const apiUpdateDoctorBio = async function apiUpdateDoctorBio({
   if (error) throw new Error(error.message);
   return { doctorBio, error };
 };
-
+//servoces moaq
 export const apiGetServices = async () => {
   let { data: services, error } = await supabase.from("services").select("*");
+  return { services, error };
+};
+export const AddServices = async (serv) => {
+  let { data: services, error } = await supabase.from("services").select("*");
+  if (error) throw new Error(error.message);
   return { services, error };
 };

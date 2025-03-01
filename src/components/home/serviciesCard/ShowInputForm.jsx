@@ -1,10 +1,11 @@
 import React from "react";
+import deleteIcon from "/public/imgs/delete_sign-256.png";
 
-export default function ShowInputForm({ showInput }) {
+export default function ShowInputForm({ showInput, handleEditClick }) {
   return (
     <div>
       <div className="flex justify-end pr-4">
-        {showInput ? (
+        {showInput && (
           <form className="flex flex-col space-y-2 items-start">
             <div className="flex gap-3 items-center">
               <input
@@ -12,9 +13,14 @@ export default function ShowInputForm({ showInput }) {
                 placeholder="Enter service title"
                 className="border rounded px-2 py-1"
               />
+              <img
+                onClick={handleEditClick}
+                className="w-[2rem] cursor-pointer"
+                src={deleteIcon}
+                alt="Delete"
+              />
             </div>
             <textarea
-              type="text"
               placeholder="Enter Content"
               className="border rounded px-2 py-1"
             />
@@ -24,15 +30,10 @@ export default function ShowInputForm({ showInput }) {
                 Upload Image
               </button>
             </div>
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-400  px-4 py-1 rounded text-white"
-            >
+            <button className="bg-blue-500 hover:bg-blue-400 px-4 py-1 rounded text-white">
               Add Service
             </button>
           </form>
-        ) : (
-          <div />
         )}
       </div>
     </div>
