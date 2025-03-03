@@ -45,8 +45,12 @@ export const apiGetServices = async () => {
   let { data: services, error } = await supabase.from("services").select("*");
   return { services, error };
 };
-export const AddServices = async (serv) => {
-  let { data: services, error } = await supabase.from("services").select("*");
+
+export const AddServices = async ({ image, title, content }) => {
+  let { data: services, error } = await supabase
+    .from("services")
+    .insert({ image: image, title: title, content: content });
+
   if (error) throw new Error(error.message);
-  return { services, error };
+  return services;
 };
