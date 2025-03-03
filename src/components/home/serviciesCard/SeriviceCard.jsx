@@ -9,6 +9,7 @@ import supabase from "../../../services/supabase";
 export default function ServiceCard() {
   const { data, isLoading, isError, error } = useGetServices();
   const { mutate, isPending } = useAddServices();
+  const [openModalId, setOpenModalId] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [addContent, setAddContent] = useState("");
   const [showInput, setShowInput] = useState(false);
@@ -92,7 +93,12 @@ export default function ServiceCard() {
         previewUrl={previewUrl}
         isUploading={isUploading}
       />
-      <CardGrid services={data?.services || []} isLoading={isLoading} />
+      <CardGrid
+        services={data?.services || []}
+        isLoading={isLoading}
+        openModalId={openModalId}
+        setOpenModalId={setOpenModalId}
+      />
     </div>
   );
 }
