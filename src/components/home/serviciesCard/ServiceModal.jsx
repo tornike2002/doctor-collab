@@ -30,7 +30,7 @@ export default function ServiceModal({ service, closeModal, handleDelete }) {
       }
 
       imageUrl = `https://secchefzcjhlryqhjkvm.supabase.co/storage/v1/object/public/doctor_storage/${uploadData.path}`;
-    } // თუ მონაცემები იგივეა, ვაბრუნებთ ერორს
+    }
     if (
       title === service.title &&
       content === service.content &&

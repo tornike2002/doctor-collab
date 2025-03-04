@@ -6,6 +6,8 @@ import { v4 as uuidv4 } from "uuid";
 import useAddServices from "../../../hooks/useAddServices";
 import supabase from "../../../services/supabase";
 import { useDeleteServices } from "../../../hooks/useDeleteServices";
+import { toast } from "react-toastify";
+import ServiceSkeleton from "./ServiceSkeleton";
 export default function ServiceCard() {
   const { data, isLoading, isError, error } = useGetServices();
   const { mutate, isPending } = useAddServices();
@@ -39,36 +41,56 @@ export default function ServiceCard() {
 
     const imgFile = fileRef.current?.files[0];
     let imageUrl = data.image;
-    console.log(imageUrl);
     const trimmedTitle = inputValue.trim();
     const trimmedContent = addContent.trim();
 
-    setIsUploading(true);
-
-    const imageName = `${uuidv4()}_${imgFile.name}`;
-    const { data: uploadData, error } = await supabase.storage
-      .from("doctor_storage")
-      .upload(imageName, imgFile);
-
-    if (error) {
-      throw new Error("Failed to upload image.");
+    // Validate if all fields are empty
+    if (
+      trimmedTitle === trimmedTitle &&
+      trimmedContent === trimmedContent &&
+      !imgFile
+    ) {
+      return toast.error("No information added.");
     }
 
-    imageUrl = `https://secchefzcjhlryqhjkvm.supabase.co/storage/v1/object/public/doctor_storage/${uploadData.path}`;
+    setIsUploading(true);
 
-    mutate({
-      title: trimmedTitle,
-      image: imageUrl,
-      content: trimmedContent,
-    });
-    setInputValue("");
-    setAddContent("");
-    setPreviewUrl("");
-    setShowInput(false);
-    if (fileRef.current) fileRef.current.value = "";
+    try {
+      if (imgFile) {
+        const imageName = `${uuidv4()}_${imgFile.name}`;
+        const { data: uploadData, error } = await supabase.storage
+          .from("doctor_storage")
+          .upload(imageName, imgFile);
+
+        if (error) {
+          setIsUploading(false);
+          return toast.error("Failed to upload image.");
+        }
+
+        imageUrl = `https://secchefzcjhlryqhjkvm.supabase.co/storage/v1/object/public/doctor_storage/${uploadData.path}`;
+      }
+
+      // Submit data
+      mutate({
+        title: trimmedTitle,
+        image: imageUrl,
+        content: trimmedContent,
+      });
+
+      // Reset form
+      setInputValue("");
+      setAddContent("");
+      setPreviewUrl("");
+      setShowInput(false);
+      if (fileRef.current) fileRef.current.value = "";
+    } catch (error) {
+      toast.error("An error occurred while submitting.");
+    } finally {
+      setIsUploading(false);
+    }
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <ServiceSkeleton />;
   if (isError) return <p>Error: {error.message}</p>;
 
   return (
@@ -98,13 +120,18 @@ export default function ServiceCard() {
         previewUrl={previewUrl}
         isUploading={isUploading}
       />
-      <CardGrid
-        services={data?.services || []}
-        isLoading={isLoading}
-        openModalId={openModalId}
-        setOpenModalId={setOpenModalId}
-        handleDelete={handleDelete}
-      />
+
+      <div className="grid grid-cols-1 gap-20 gap-y-10 p-4 sm:grid-cols-2 lg:grid-cols-3">
+        {data?.services.slice(0, 6).map((service) => (
+          <CardGrid
+            service={service}
+            isLoading={isLoading}
+            openModalId={openModalId}
+            setOpenModalId={setOpenModalId}
+            handleDelete={handleDelete}
+          />
+        ))}
+      </div>
     </div>
   );
 }
