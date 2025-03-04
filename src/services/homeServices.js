@@ -45,10 +45,10 @@ export const apiGetServices = async () => {
   let { data: services, error } = await supabase
     .from("services")
     .select("*")
-    .order("id", { ascending: true });
+    .order("id", { ascending: true })
+    .limit(6);
   return { services, error };
 };
-
 export const AddServices = async ({ image, title, content }) => {
   let { data: services, error } = await supabase
     .from("services")
