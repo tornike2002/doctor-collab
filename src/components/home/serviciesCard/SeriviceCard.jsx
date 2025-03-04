@@ -5,7 +5,7 @@ import ShowInputForm from "./ShowInputForm";
 import { v4 as uuidv4 } from "uuid";
 import useAddServices from "../../../hooks/useAddServices";
 import supabase from "../../../services/supabase";
-
+import { useDeleteServices } from "../../../hooks/useDeleteServices";
 export default function ServiceCard() {
   const { data, isLoading, isError, error } = useGetServices();
   const { mutate, isPending } = useAddServices();
@@ -14,6 +14,7 @@ export default function ServiceCard() {
   const [addContent, setAddContent] = useState("");
   const [showInput, setShowInput] = useState(false);
   const [previewUrl, setPreviewUrl] = useState("");
+  const { mutate: deleteServices } = useDeleteServices();
   const [isUploading, setIsUploading] = useState(false);
   const fileRef = useRef();
 
@@ -27,6 +28,10 @@ export default function ServiceCard() {
       const previewUrl = URL.createObjectURL(file);
       setPreviewUrl(previewUrl);
     }
+  };
+
+  const handleDelete = (id) => {
+    deleteServices(id);
   };
 
   const submitServiceAdd = async (e) => {
@@ -98,6 +103,7 @@ export default function ServiceCard() {
         isLoading={isLoading}
         openModalId={openModalId}
         setOpenModalId={setOpenModalId}
+        handleDelete={handleDelete}
       />
     </div>
   );

@@ -1,7 +1,12 @@
 import threedot from "/imgs/7066144.png";
 import Modal from "../../Modal/Modal";
 import ServiceModal from "./ServiceModal";
-function ServiceCardItem({ service, openModalId, setOpenModalId }) {
+function ServiceCardItem({
+  service,
+  openModalId,
+  setOpenModalId,
+  handleDelete,
+}) {
   return (
     <div className="relative flex flex-col items-center rounded-lg p-4 shadow-lg hover:shadow-xl hover:scale-110 transition-transform duration-500">
       <div className="relative w-full group">
@@ -22,7 +27,7 @@ function ServiceCardItem({ service, openModalId, setOpenModalId }) {
           <ServiceModal
             service={service}
             closeModal={() => setOpenModalId(null)}
-            // handleDelete={handleDelete}
+            handleDelete={handleDelete}
           />
         </Modal>
       )}
