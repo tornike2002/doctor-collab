@@ -9,19 +9,14 @@ function BlogHero() {
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error: {error.message}</p>;
 
-
-  if (!Array.isArray(data) || data.length === 0) {
-    return <p>No blog content available.</p>;
-  }
-
   return (
     <div>
       {data.map((Hero) => (
         <BlogHeroContent
-        
+          key={Hero.id} 
           id={Hero.id}
           HeroSubTitle={Hero.sub_title}
-        HeroImg={Hero.img}
+          HeroImg={Hero.img}
           HeroTitle={Hero.title}
         />
       ))}

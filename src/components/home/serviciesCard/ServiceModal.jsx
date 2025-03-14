@@ -5,6 +5,7 @@ import { useUpServices } from "../../../hooks/useUpServices";
 import supabase from "../../../services/supabase";
 import Closse from "/public/imgs/delete_sign-256.png";
 import ServiceModalForm from "./ServiceModalForm";
+
 export default function ServiceModal({ service, closeModal, handleDelete }) {
   const modalFileRef = useRef();
   const { mutate: updateService } = useUpServices();
