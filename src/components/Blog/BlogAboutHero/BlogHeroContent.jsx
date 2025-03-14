@@ -33,62 +33,51 @@ export default function BlogHeroContent({
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-  
+
     const imgFile = fileRef.current?.files[0];
     const formData = new FormData(event.target);
-  
-    // Get updated form data
-    const updatedData = {
-      id,
-      title: formData.get("title").trim(),
-      subtitle: formData.get("sub_title").trim(),
-    };
-  
-    // Ensure the text length validation
-    if (updatedData.title.length < 3 || updatedData.title.length > 20) {
+
+    const title = formData.get("title");
+    const subtitle = formData.get("sub_title");
+
+    if (title.length < 3 || title.length > 20) {
       return toast.error("Title must be between 3 and 20 characters.");
     }
-    if (updatedData.subtitle.length < 5 || updatedData.subtitle.length > 30) {
+    if (subtitle.length < 5 || subtitle.length > 30) {
       return toast.error("Subtitle must be between 5 and 30 characters.");
     }
-  
-    // Check if there are any changes to text or image
-    if (
-      updatedData.title === HeroTitle &&
-      updatedData.subtitle === HeroSubTitle &&
-      !imgFile
-    ) {
+
+    if (title === HeroTitle && subtitle === HeroSubTitle && !imgFile) {
       return toast.error("No changes detected.");
     }
-  
-    let imageUrl = HeroImg; // Default to current image if no new image is uploaded
-    
-    // If an image file was uploaded, upload it to Supabase
+
+    let imageUrl = HeroImg;
+
     if (imgFile) {
       const imageName = `${uuidv4()}_${imgFile.name}`;
       const { data: uploadData, error } = await supabase.storage
         .from("doctor_storage")
         .upload(imageName, imgFile);
-  
+
       if (error) {
         return toast.error("Failed to upload image.");
       }
-  
-      
+
       imageUrl = `https://secchefzcjhlryqhjkvm.supabase.co/storage/v1/object/public/doctor_storage/${uploadData.path}`;
     }
-  
-   
-    updateBlogHero({ ...updatedData, img: imageUrl });
-  
-   
+
+    updateBlogHero({
+      id: id, 
+      title: title,
+      subtitle: subtitle, 
+      img: imageUrl,
+    });
+
     setModalToggle(false);
     setImagePreview(imageUrl);
-  
-   
+
     toast.success("Blog Hero updated successfully.");
   };
-  
 
   return (
     <div
@@ -120,10 +109,10 @@ export default function BlogHeroContent({
       )}
 
       <div className="flex flex-col justify-end gap-3 px-[36px] h-full">
-        <h1 className="text-black font-poppinsRegular text-[48px] leading-[40px]">
+        <h1 className="text-white font-bold   text-[48px] leading-[40px]">
           {HeroTitle}
         </h1>
-        <h3 className="text-black font-heeboRegular text-[24px] leading-[24px]">
+        <h3 className="text-white  font-heeboRegular text-[24px] leading-[24px]">
           {HeroSubTitle}
         </h3>
       </div>

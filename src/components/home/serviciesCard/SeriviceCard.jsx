@@ -124,6 +124,7 @@ export default function ServiceCard() {
       <div className="grid grid-cols-1 gap-20 gap-y-10 p-4 sm:grid-cols-2 lg:grid-cols-3">
         {data.services.map((service) => (
           <CardGrid
+          key={service.id}
             service={service}
             isLoading={isLoading}
             openModalId={openModalId}

@@ -7,7 +7,7 @@ function BlogHeroModalContent({
   HeroTitle, 
   HeroSubTitle, 
   imagePreview, 
-  handleImagePreview, 
+  
   fileRef 
 }) {
   return (
