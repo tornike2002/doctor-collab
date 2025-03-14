@@ -1,14 +1,9 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Outlet,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import AdminLayout from "./components/adminLayout/AdminLayout";
-
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/adminLayout/ProtectedRoute";
 import Home from "./pages/Home";
+import Blog from "./pages/Blog";
 
 const routes = [
   { path: "/login", element: <Login /> },
@@ -21,7 +16,10 @@ const routes = [
         </AdminLayout>
       </ProtectedRoute>
     ),
-    children: [{ path: "/", element: <Home /> }],
+    children: [
+      { path: "", element: <Home /> },  // Change "/" to "" for Home route
+      { path: "blog", element: <Blog /> },
+    ],
   },
 ];
 
