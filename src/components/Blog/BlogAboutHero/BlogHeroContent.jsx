@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import useUpdateBlogHero from "../../../hooks/useUpdateBlogHero ";
 import threedot from "/imgs/7066144.png";
 import supabase from "../../../services/supabase";
+
 export default function BlogHeroContent({
   HeroImg,
   HeroTitle,
@@ -29,47 +30,65 @@ export default function BlogHeroContent({
       setImagePreview(previewUrl);
     }
   };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+  
     const imgFile = fileRef.current?.files[0];
-    let imageUrl = HeroImg;
-
     const formData = new FormData(event.target);
+  
+    // Get updated form data
     const updatedData = {
       id,
       title: formData.get("title").trim(),
       subtitle: formData.get("sub_title").trim(),
     };
-
   
-    if (updatedData.title === HeroTitle && updatedData.subtitle === HeroSubTitle && !imgFile) {
-      return toast.error("No changes detected.");
-    }
+    // Ensure the text length validation
     if (updatedData.title.length < 3 || updatedData.title.length > 20) {
       return toast.error("Title must be between 3 and 20 characters.");
     }
     if (updatedData.subtitle.length < 5 || updatedData.subtitle.length > 30) {
       return toast.error("Subtitle must be between 5 and 30 characters.");
     }
-
+  
+    // Check if there are any changes to text or image
+    if (
+      updatedData.title === HeroTitle &&
+      updatedData.subtitle === HeroSubTitle &&
+      !imgFile
+    ) {
+      return toast.error("No changes detected.");
+    }
+  
+    let imageUrl = HeroImg; // Default to current image if no new image is uploaded
+    
+    // If an image file was uploaded, upload it to Supabase
     if (imgFile) {
       const imageName = `${uuidv4()}_${imgFile.name}`;
       const { data: uploadData, error } = await supabase.storage
-      .from("doctor_storage")
+        .from("doctor_storage")
         .upload(imageName, imgFile);
-
+  
       if (error) {
         return toast.error("Failed to upload image.");
       }
-
+  
+      
       imageUrl = `https://secchefzcjhlryqhjkvm.supabase.co/storage/v1/object/public/doctor_storage/${uploadData.path}`;
     }
-
+  
+   
     updateBlogHero({ ...updatedData, img: imageUrl });
+  
+   
     setModalToggle(false);
     setImagePreview(imageUrl);
+  
+   
     toast.success("Blog Hero updated successfully.");
   };
+  
 
   return (
     <div
@@ -93,7 +112,6 @@ export default function BlogHeroContent({
             HeroSubTitle={HeroSubTitle}
             handleModalOpen={handleModalOpen}
             handleFormSubmit={handleFormSubmit}
-        
             fileRef={fileRef}
             handleImagePreview={handleImagePreview}
             imagePreview={imagePreview}
