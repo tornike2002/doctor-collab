@@ -22,7 +22,7 @@ export default function Banner() {
     const formData = new FormData(e.target);
     const text = formData.get("title");
 
-    console.log(id);
+
     if (!text || text.trim().length < 5) {
       setEditError("Text must be at least 5 characters long.");
     } else {

@@ -5,9 +5,7 @@ import SkeletonBlog from "./SkeletonBlog";
 function BlogHero() {
   const { data, isLoading, isError, error } = useGetBlogHero();
 
-  console.log("Fetched data:", data);
-
-  if (isLoading) return <p><SkeletonBlog/></p>;
+  if (isLoading) return <SkeletonBlog/>;
   if (isError) return <ErrorMessage errorMessage={error.message}/>
 
   return (

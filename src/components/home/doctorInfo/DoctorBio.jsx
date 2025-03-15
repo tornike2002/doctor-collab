@@ -7,7 +7,6 @@ import DoctorBioSkeleton from "./DoctorBioSkeleton";
 function DoctorBio() {
   const [isOpen, setIsOpen] = useState(false);
   const { data: doctorimg, isLoading, isError } = useGetDoctorBio();
-  console.log(doctorimg);
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
