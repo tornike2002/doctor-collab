@@ -15,3 +15,12 @@ export async function apiUpdateBlogHero({ img, sub_title, title, id }) {
   
     return data;
   }
+
+
+
+
+  export async function apiGetBlogAdd() {
+    const { data, error } = await supabase.from("blogs").select("*");
+    if (error) throw error;
+    return data;
+  }
