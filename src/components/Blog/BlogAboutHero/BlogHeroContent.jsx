@@ -40,10 +40,10 @@ export default function BlogHeroContent({
     const title = formData.get("title");
     const subtitle = formData.get("sub_title");
 
-    if (title.length < 3 || title.length > 20) {
+    if (title.length < 3 || title.length > 40) {
       return toast.error("Title must be between 3 and 20 characters.");
     }
-    if (subtitle.length < 5 || subtitle.length > 30) {
+    if (subtitle.length < 5 || subtitle.length > 40) {
       return toast.error("Subtitle must be between 5 and 30 characters.");
     }
 
@@ -69,7 +69,7 @@ export default function BlogHeroContent({
     updateBlogHero({
       id: id, 
       title: title,
-      subtitle: subtitle, 
+      sub_title: subtitle, 
       img: imageUrl,
     });
 
