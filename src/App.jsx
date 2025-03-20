@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./components/adminLayout/ProtectedRoute";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
+import BlogInformation from "./components/Blog/BlogInformation/BlogInformation";
 
 const routes = [
   { path: "/login", element: <Login /> },
@@ -17,11 +18,13 @@ const routes = [
       </ProtectedRoute>
     ),
     children: [
-      { path: "", element: <Home /> },  // Change "/" to "" for Home route
+      { path: "", element: <Home /> },
       { path: "blog", element: <Blog /> },
+      { path: "blog/:id", element: <BlogInformation/>}
     ],
   },
 ];
+
 
 function App() {
   return (

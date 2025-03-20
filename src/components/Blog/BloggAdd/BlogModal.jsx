@@ -7,81 +7,83 @@ import useUpdateBlog from "../../../hooks/useUpdateBlog";
 export default function BlogModal({ data, handleDelete, closeModal, errors, setErrors }) {
   const { mutate: updateBlog } = useUpdateBlog();
   const fileInputRef = useRef(null);
-
+  console.log(data.title)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-
-    const title = formData.get("title");
-    const slug = formData.get("slug");
-    const reading_time = formData.get("reading_time");
-    const description = formData.get("description");
+  
+    const title = formData.get("title").trim();
+    const slug = formData.get("slug").trim();
+    const reading_time = parseInt(formData.get("reading_time"), 10); 
+    const description = formData.get("description").trim();
     const imageFile = formData.get("img");
-
+  
     let imageUrl = data.picture;
     const newErrors = {};
-
-    
+  
+    // ვალიდაციები
     if (!title) newErrors.title = "Title is required.";
     if (!slug) newErrors.slug = "Slug is required.";
     if (description.length < 100) {
       newErrors.description = "Description must be at least 100 characters.";
     }
     if (!reading_time) {
-      newErrors.reading_time = "Time is required.";
-    } else if (parseInt(reading_time, 10) > 60) {
+      newErrors.reading_time = "Time";
+    } else if (reading_time > 60) {
       newErrors.reading_time = "Reading time cannot exceed 60 minutes.";
     }
-
-    
+  
+   
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
+  
    
+   
+  
+    // თუ ყველა მონაცემი იგივეა
     if (
-      title === data.title &&
-      slug === data.slug &&
-      reading_time === data.reading_time &&
-      description === data.description &&
-      !imageFile
+      title.trim() === data.title.trim() &&
+      slug.trim() === data.slug.trim() &&
+      reading_time === parseInt(data.reading_time, 10) &&
+      description.trim() === data.description.trim() &&
+      (!imageFile || imageFile.size === 0)
     ) {
-      return toast.error("No changes detected.");
+      console.log("No changes detected.");
+      toast.error("No changes detected.");
+      return;
     }
-
     
+  
+    // სურათის ატვირთვა
     if (imageFile && imageFile.size > 0) {
       const imageName = `${uuidv4()}_${imageFile.name}`;
       const { data: uploadData, error } = await supabase.storage
         .from("doctor_storage")
         .upload(imageName, imageFile);
-
+  
       if (error) {
         return toast.error("Failed to upload image.");
       }
-
+  
       imageUrl = `https://secchefzcjhlryqhjkvm.supabase.co/storage/v1/object/public/doctor_storage/${uploadData.path}`;
     }
-
-    
-    try {
-      await updateBlog({
-        id: data.id,
-        title,
-        slug,
-        description,
-        img: imageUrl,
-        reading_time,
-      });
-
-      toast.success("Blog updated successfully!");
-      setErrors({}); 
-      closeModal();
-    } catch (error) {
-      toast.error("Failed to update blog.");
-    }
+  
+    // მონაცემების განახლება
+    updateBlog({
+      id: data.id,
+      title,
+      slug,
+      description,
+      img: imageUrl,
+      reading_time,
+    });
+  
+    setErrors({});
+    closeModal();
   };
+  
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -126,13 +128,9 @@ export default function BlogModal({ data, handleDelete, closeModal, errors, setE
               name="reading_time"
               defaultValue={data.reading_time}
               required
-              className={`border rounded-lg px-3 py-2 w-full focus:ring-2 focus:outline-none ${
-                errors.reading_time ? "border-red-500 border-2" : "border-gray-300"
-              }`}
+   className="border border-gray-300 rounded px-4 py-2 w-full"
             />
-            {errors.reading_time && (
-              <p className="text-red-500 text-sm">{errors.reading_time}</p>
-            )}
+          
           </div>
 
           {/* Content */}

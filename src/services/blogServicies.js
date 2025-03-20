@@ -51,8 +51,18 @@ export async function UpdateBlog({ title, slug, description, img, reading_time,i
     .from("blogs")
     .update({ title, slug, description, img, reading_time,id })
     .eq("id", id)
-    .order("id", { ascending: true })
+    .order("created_at", { ascending: false })
   if (error) throw error;
 
   return data;
 }
+
+export const getBlogId = async (id) => {
+  let { data, error } = await supabase
+    .from("blogs")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  return { blog: data, error };
+};

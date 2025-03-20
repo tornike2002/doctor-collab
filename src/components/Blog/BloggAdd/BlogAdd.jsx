@@ -8,14 +8,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import AddButton from './AddButton';
 import BlogForm from './BlogForm';
 import Modal from '../../Modal/Modal';
-import BlogCard from './BlogCard';
+
 import { useNavigate } from 'react-router-dom';
 import { useDeleteBlogs } from '../../../hooks/useDeleteBlogs';
 import BlogSkeleton from './BlogSkeleton';
 import ErrorMessage from '../../ErrorMessage';
+import BlogList from './BlogList.JSX';
 export default function BlogAdd() {
     const { data: blogs, isError, isLoading, error } = useGetBlogAdd();
-    console.log(blogs)
+   
     const { mutate: AddBlogInfo, isPending } = useAddBlog();
     const { mutate: deleteBlogs } = useDeleteBlogs();
     const [showForm, setShowForm] = useState(false);
@@ -104,7 +105,13 @@ export default function BlogAdd() {
         navigate(`/blog/${id}`);
     };
 
-    if (isLoading) return <BlogSkeleton/>;
+
+
+
+
+
+    if (isLoading) return <BlogSkeleton/>
+  
     if (isError) return <ErrorMessage errorMessage={error.message}/>
 
     return (
@@ -115,21 +122,19 @@ export default function BlogAdd() {
                     <BlogForm  onSubmit={handleSubmit} onClose={handleCloseForm} errors={errors} />
                 </Modal>
             )}
-            {blogs.length > 0 ? (
-                blogs.map((item) => (
-                    <BlogCard
-                        data={item}
-                        key={item.id}
-                        handleDelete={handleDelete}
-                        errors={errors}
-                        setErrors={setErrors}
-                        onClosed={handleCloseForm}
-                    
-                    />
-                ))
-            ) : (
-                <div>No blogs available for this page.</div>
-            )}
+           
+          {/* { blogs.map((item) => (
+        <BlogCard
+            key={item.id}
+            data={item}
+            handleDelete={handleDelete}
+            errors={errors}
+            setErrors={setErrors}
+            onClosed={handleCloseForm}
+        />
+           ))} */}
+           
+           <BlogList data={blogs} handleDelete={handleDelete}/>
         </div>
     );
 }
