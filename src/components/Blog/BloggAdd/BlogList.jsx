@@ -7,13 +7,11 @@ export default function BlogList({
   data,
   handleDelete,
  
-  isLoading,
-  error,
 }) {
 
   const itemsPerPage = 3;
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
+
 
   const currentPage = parseInt(searchParams.get("page")) || 1;
 

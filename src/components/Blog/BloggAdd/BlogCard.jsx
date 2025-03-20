@@ -3,20 +3,16 @@ import { useNavigate } from "react-router-dom"; // <-- import useNavigate
 import threedot from "/imgs/7066144.png";
 import Modal from "../../Modal/Modal";
 import BlogModal from "./BlogModal";
-
+import { Link } from "react-router-dom";
 
 export default function BlogCard({ data, handleDelete, errors, setErrors }) {
   const navigate = useNavigate();
-  console.log(data) 
+  
   const [openModalId, setOpenModalId] = useState(null);
   
 
   
 
-  const handleCardClick = () => {
-    navigate(`/blog/${data.id}`); 
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
 
 
@@ -27,12 +23,15 @@ export default function BlogCard({ data, handleDelete, errors, setErrors }) {
     <div className="relative w-full p-[40px]">
       <div className="shadow-2xl rounded-[15px] cursor-pointer bg-white transition-transform duration-300 ease-in-out hover:scale-105">
         <div className="relative rounded-[15px] p-[30px]">
+          <Link to={`/blog/${data.id}`}>
           <img
             src={data.img}
-            onClick={handleCardClick}
+            
             alt="main_picture"
             className="w-full h-[350px] object-cover rounded-t-[15px] cursor-pointer object-center"
           />
+          </Link>
+        
           <img
             src={threedot}
             alt="menu"
