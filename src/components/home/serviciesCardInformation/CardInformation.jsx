@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 
 import { useGetServicesId } from "../../../hooks/useGetServiciesId";
+import ErrorMessage from "../../ErrorMessage";
 import BlogSkeleton from "../../Blog/BlogInformation/BlogSkeleton";
 function CardInformation() {
   const { id } = useParams();
@@ -10,8 +11,8 @@ function CardInformation() {
   if (isLoading) return <BlogSkeleton/>;
 
  
-  const serviceData = data?.service;
-  if (isError) return <p className="text-center text-red-500">Error: Service not found.</p>;
+  const serviceData = data.service;
+  if (isError) return <ErrorMessage/>;
 
 
   const contentParts = serviceData.content
