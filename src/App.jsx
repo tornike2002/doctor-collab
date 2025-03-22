@@ -5,7 +5,7 @@ import ProtectedRoute from "./components/adminLayout/ProtectedRoute";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import BlogInformation from "./components/Blog/BlogInformation/BlogInformation";
-
+import CardInformation from "./components/home/serviciesCardInformation/CardInformation";
 const routes = [
   { path: "/login", element: <Login /> },
   {
@@ -20,7 +20,9 @@ const routes = [
     children: [
       { path: "", element: <Home /> },
       { path: "blog", element: <Blog /> },
-      { path: "blog/:id", element: <BlogInformation/>}
+      { path: "blog/:id", element: <BlogInformation/>},
+      { path: "servicies/:id", element: <CardInformation/>}
+
     ],
   },
 ];

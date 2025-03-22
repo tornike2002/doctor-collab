@@ -1,17 +1,28 @@
 import threedot from "/imgs/7066144.png";
 import Modal from "../../Modal/Modal";
 import ServiceModal from "./ServiceModal";
+import { useNavigate } from "react-router-dom";
 
 function ServiceCardItem({
   service,
   openModalId,
   setOpenModalId,
   handleDelete,
+  id,
 }) {
+  const navigate = useNavigate();
+
+  const navigateHandler = () => {
+    navigate(`/servicies/${id}`);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 100);
+  };
   return (
-    <div className="relative flex flex-col items-center rounded-lg p-4 shadow-lg hover:shadow-xl hover:scale-110 transition-transform duration-500">
+    <div onClick={navigateHandler} className="relative flex flex-col items-center rounded-lg p-4 shadow-lg hover:shadow-xl hover:scale-110 transition-transform duration-500">
       <div className="relative w-full group">
         <img
+        
           src={service.image}
           alt="Service"
           className="w-full object-cover object-center h-[14rem] rounded-lg mb-2 cursor-pointer shadow-md"

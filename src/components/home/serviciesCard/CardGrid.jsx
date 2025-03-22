@@ -3,7 +3,7 @@ import ServiceCardItem from "./ServiceCardItem";
 function CardGrid({ service, openModalId, setOpenModalId, handleDelete }) {
   return (
     <ServiceCardItem
-      key={service.id}
+      id={service.id}
       service={service}
       openModalId={openModalId}
       setOpenModalId={setOpenModalId}
