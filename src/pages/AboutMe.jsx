@@ -1,5 +1,8 @@
 import React from "react";
+import AboutMeInfo from "../components/aboutMe/aboutMeInfo/AboutMeInfo";
 
 export default function AboutMe() {
-  return <div>AboutMe</div>;
+  return <div>
+    <AboutMeInfo/>
+  </div>;
 }

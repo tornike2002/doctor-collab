@@ -7,7 +7,7 @@ const AdminLayout = ({ children }) => {
   return (
     <div>
       <MainContentWrapper>
-        {/* header here */}
+       
 
         <Header />
         <main>{children}</main>
