@@ -1,12 +1,14 @@
 import { useGetAboutInfo } from "../../../hooks/useGetAboutInfo";
+import ErrorMessage from "../../ErrorMessage";
 import AboutMeImg from "./AboutMeImg";
+import AboutMeSkeleton from "./AboutMeSkeleton";
 
 
 export default function AboutMeInfo() {
-  const { data, isLoading, isError } = useGetAboutInfo();
+  const { data, isLoading, isError,error } = useGetAboutInfo();
   console.log(data)
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Error loading data.</p>;
+  if (isLoading) return <AboutMeSkeleton/>;
+  if (isError) return<ErrorMessage errorMessage={error.message}/>
   return (
     <div className="">
         
