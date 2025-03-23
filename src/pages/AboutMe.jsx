@@ -1,8 +1,10 @@
-import React from "react";
+
 import AboutMeInfo from "../components/aboutMe/aboutMeInfo/AboutMeInfo";
+import AboutMeExperience from "../components/aboutMe/Experience/AboutMeExperience";
 
 export default function AboutMe() {
-  return <div>
+  return <div className="px-[30px]">
     <AboutMeInfo/>
+    <AboutMeExperience/>
   </div>;
 }
