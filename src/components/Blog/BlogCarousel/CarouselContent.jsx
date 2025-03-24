@@ -23,7 +23,7 @@ function CarouselContent({ img, reading, title, content, id }) {
         alt={`Thumbnail for ${title}`}
         className="h-[337px] object-cover object-center bg-no-repeat w-full max-w-[427px]"
       />
-      <h1 className="text-[red]">hello</h1>
+
       <h3 className="font-heeboBold text-[15px] leading-[135%] text-[#00000080] pt-4">
         Reading time: {reading} minutes
       </h3>

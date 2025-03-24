@@ -13,7 +13,7 @@ export default function SkillEdit({
         <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-lg relative">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl cursor-pointer font-semibold mb-4 break-words">
-              Edit Experience
+              Edit Skill
             </h2>
             <img
               className="w-[20px] cursor-pointer"

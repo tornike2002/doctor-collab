@@ -7,7 +7,7 @@ export default function EducationAdd({ setModalToggle }) {
         className="bg-[#2148c9] p-[10px] rounded-full text-[20px] text-[#fff] "
         onClick={() => setModalToggle(true)}
       >
-        + Add Experience
+        + Add New Education
       </button>
     </div>
   );

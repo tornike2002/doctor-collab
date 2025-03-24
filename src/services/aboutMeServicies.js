@@ -154,3 +154,36 @@ export async function apiUpSkills({ skil, description, id }) {
 
   return data;
 }
+
+//awards
+
+export const getAwards = async () => {
+  const { data, error } = await supabase.from("awards").select("*");
+  if (error) throw error;
+  return data;
+};
+
+export const addAwards = async ({ name, date, awardedBy }) => {
+  const { data, error } = await supabase.from("awards").insert({
+    date,
+    awardedBy,
+    name,
+  });
+  if (error) throw new Error(error.message);
+  return { data, error };
+};
+
+export const updateAwards = async (id, name, date, awardedBy) => {
+  const { data, error } = await supabase
+    .from("awards")
+    .update({ id, name, date, awardedBy })
+    .eq("id", id);
+  if (error) throw new Error(error.message);
+  return { award: data, error };
+};
+
+export const deleteAwards = async (id) => {
+  const { data, error } = await supabase.from("awards").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+  return { data, error };
+};

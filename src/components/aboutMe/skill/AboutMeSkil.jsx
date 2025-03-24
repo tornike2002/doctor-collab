@@ -7,6 +7,8 @@ import useAddSkills from "../../../hooks/useAddSkills";
 import SkillAdd from "./SkillAdd";
 import Modal from "../../Modal/Modal";
 import SkillForm from "./SkillForm";
+import SkillSkeletons from "./SkillSkeletons";
+import ErrorMessage from "../../ErrorMessage";
 export default function AboutMeSkil() {
   const { data, error, isLoading, isError } = useGetSkills();
   const { mutate: addSkills } = useAddSkills();
@@ -39,10 +41,8 @@ export default function AboutMeSkil() {
     setErrors({});
   };
 
-  // Delete functionality
-
-  if (isLoading) return <p>loading...</p>;
-  if (isError) return <p>hadad</p>;
+  if (isLoading) return <SkillSkeletons />;
+  if (isError) return <ErrorMessage errorMessage={error.message} />;
   const handleDelete = (id) => {
     deleteSkills(id);
   };
@@ -63,7 +63,6 @@ export default function AboutMeSkil() {
             errors={errors}
             handleClose={handleClose}
           />
-        
         </Modal>
       )}
     </div>
