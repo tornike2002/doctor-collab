@@ -7,7 +7,7 @@ import EducationForm from "./EducationForm";
 import Modal from "../../Modal/Modal";
 
 import { useDeleteAboutMeEducation } from "../../../hooks/useDeleteAboutMeEducation";
-import ExperienceSkeleton from "../Experience/ExperienceSkeleton";
+
 import ErrorMessage from "../../ErrorMessage";
 import Skeleton from "./Skeleton";
 
@@ -64,7 +64,7 @@ export default function AboutMeEducation() {
   }
 
   if (isError) return <ErrorMessage errorMessage={error.message} />;
-
+  console.log(data);
   return (
     <div>
       <EducationList handleDelete={handleDelete} data={data} />

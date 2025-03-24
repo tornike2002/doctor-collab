@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { apiGetSkills } from "../services/aboutMeServicies";
+import { apiGetEducation } from "../services/aboutMeServicies";
 
-function useGetEducation() {
+function useGetExperience() {
   return useQuery({
-    queryKey: ["skills"],
-    queryFn: apiGetSkills,
+    queryKey: ["education"],
+    queryFn: apiGetEducation,
   });
 }
 
-export default useGetEducation;
+export default useGetExperience;

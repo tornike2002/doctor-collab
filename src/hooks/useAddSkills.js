@@ -1,17 +1,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-import { AddServices } from "../services/homeServices";
+import { addSkills } from "../services/aboutMeServicies";
 
-const useAddServices = () => {
+const useAddSkills = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: ({ image, title, content }) =>
-      AddServices({ skill,description }),
+    mutationFn: ({ skil, description }) => addSkills({ skil, description }),
     onSuccess: () => {
-      toast.success("serivices added successfully");
-      queryClient.invalidateQueries(["services"]);
+      toast.success("skills added successfully");
+      queryClient.invalidateQueries(["skills"]);
     },
     onError: (error) => {
       toast.error(error.message);
@@ -20,4 +19,4 @@ const useAddServices = () => {
   return mutation;
 };
 
-export default useAddServices;
+export default useAddSkills;

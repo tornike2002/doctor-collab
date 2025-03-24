@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { getServicesId } from "../services/homeServices";
+import { getSkills } from "../services/aboutMeServicies";
 
-export const useGetSkills = (id) => {
+export const useGetSkills = () => {
   return useQuery({
-    queryKey: ["services", id],
-    queryFn: () => getServicesId(id),
-    enabled: !!id,
+    queryKey: ["skills"],
+    queryFn: getSkills,
   });
 };

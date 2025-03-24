@@ -120,15 +120,16 @@ export async function apiUpEducation({ degree, dateFrom, dateTo, uni, id }) {
 }
 
 //skills
-export const apiGetSkills = async () => {
-  let { data, error } = await supabase.from("skills").select("*");
+
+export const getSkills = async () => {
+  const { data, error } = await supabase.from("skills").select("*");
   if (error) throw error;
   return data;
 };
 
-export const addSkills = async (skill, description) => {
+export const addSkills = async ({ skil, description }) => {
   const { data, error } = await supabase.from("skills").insert({
-    skill,
+    skil,
     description,
   });
   if (error) throw new Error(error.message);
@@ -142,10 +143,10 @@ export const deleteSkills = async (id) => {
   return { data, error };
 };
 
-export async function apiUpSkills({ skill, description, id }) {
+export async function apiUpSkills({ skil, description, id }) {
   const { data, error } = await supabase
     .from("skills")
-    .update({ skill, description, id })
+    .update({ skil, description, id })
     .single()
     .eq("id", id)
     .order("created_at", { ascending: false });
