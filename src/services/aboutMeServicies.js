@@ -77,3 +77,79 @@ export const apiGetExperienceById = async (id) => {
 
   return { blog: data, error };
 };
+
+//education
+
+export const apiGetEducation = async () => {
+  let { data, error } = await supabase.from("education").select("*");
+  if (error) throw error;
+  return data;
+};
+
+export const addEducation = async (degree, dateFrom, dateTo, uni) => {
+  const { data, error } = await supabase.from("education").insert({
+    degree,
+    dateFrom,
+    dateTo,
+    uni,
+  });
+  if (error) throw new Error(error.message);
+  return { data, error };
+};
+
+export const deleteEducation = async (id) => {
+  const { data, error } = await supabase
+    .from("education")
+    .delete()
+    .eq("id", id);
+
+  if (error) throw new Error(error.message);
+  return { data, error };
+};
+
+export async function apiUpEducation({ degree, dateFrom, dateTo, uni, id }) {
+  const { data, error } = await supabase
+    .from("education")
+    .update({ degree, dateFrom, dateTo, uni, id })
+    .single()
+    .eq("id", id)
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+
+  return data;
+}
+
+//skills
+export const apiGetSkills = async () => {
+  let { data, error } = await supabase.from("skills").select("*");
+  if (error) throw error;
+  return data;
+};
+
+export const addSkills = async (skill, description) => {
+  const { data, error } = await supabase.from("skills").insert({
+    skill,
+    description,
+  });
+  if (error) throw new Error(error.message);
+  return { data, error };
+};
+
+export const deleteSkills = async (id) => {
+  const { data, error } = await supabase.from("skills").delete().eq("id", id);
+
+  if (error) throw new Error(error.message);
+  return { data, error };
+};
+
+export async function apiUpSkills({ skill, description, id }) {
+  const { data, error } = await supabase
+    .from("skills")
+    .update({ skill, description, id })
+    .single()
+    .eq("id", id)
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+
+  return data;
+}
