@@ -31,17 +31,11 @@ export const apiAddAboutMeExperience = async ({
 }) => {
   let { data, error } = await supabase
     .from("experience")
-    .insert({   place,
-      department,
-     dateFrom,
-     dateTo,
-      position,});
+    .insert({ place, department, dateFrom, dateTo, position });
 
   if (error) throw new Error(error.message);
-  return {data,error}; 
+  return { data, error };
 };
-
-
 
 const apiDeleteAboutMeExperience = async (id) => {
   const { data, error } = await supabase
@@ -49,8 +43,37 @@ const apiDeleteAboutMeExperience = async (id) => {
     .delete()
     .eq("id", id);
 
-    if (error) throw new Error(error.message);
-    return {data,error}; 
+  if (error) throw new Error(error.message);
+  return { data, error };
 };
 
 export default apiDeleteAboutMeExperience;
+
+export async function apiUpExperience({
+  place,
+  department,
+  dateTo,
+  dateFrom,
+  position,
+  id,
+}) {
+  const { data, error } = await supabase
+    .from("experience")
+    .update({ place, department, dateFrom, dateTo, position })
+    .single()
+    .eq("id", id)
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+
+  return data;
+}
+
+export const apiGetExperienceById = async (id) => {
+  let { data, error } = await supabase
+    .from("experience")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  return { blog: data, error };
+};
