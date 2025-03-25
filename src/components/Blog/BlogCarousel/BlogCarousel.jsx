@@ -3,12 +3,13 @@ import "swiper/css";
 import { useGetBlogAdd } from '../../../hooks/useGetBlogAdd';
 import ErrorMessage from "../../ErrorMessage";
 import CarouselContent from "./CarouselContent";
+import BlogCarouselSkeelton from "./BlogCarouselSkeelton";
 
 export default function BlogCarousel() {
   const { data, isLoading, isError, error } = useGetBlogAdd();
 console.log(data)
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <BlogCarouselSkeelton/>;
   }
 
   if (isError) {

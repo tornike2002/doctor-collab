@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import BlogInformation from "./components/Blog/BlogInformation/BlogInformation";
 import CardInformation from "./components/home/serviciesCardInformation/CardInformation";
+import AboutMe from "./pages/AboutMe";
 const routes = [
   { path: "/login", element: <Login /> },
   {
@@ -21,7 +22,8 @@ const routes = [
       { path: "", element: <Home /> },
       { path: "blog", element: <Blog /> },
       { path: "blog/:id", element: <BlogInformation/>},
-      { path: "servicies/:id", element: <CardInformation/>}
+      { path: "servicies/:id", element: <CardInformation/>},
+      { path: "About", element: <AboutMe/>}
 
     ],
   },
