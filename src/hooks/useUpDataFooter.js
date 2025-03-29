@@ -13,7 +13,7 @@ function useUpDataFooter() {
       queryClient.invalidateQueries("footer");
     },
     onError: () => {
-      toast.error(`footer Bio update failed`);
+      toast.error("footer Bio update failed");
     },
   });
 }

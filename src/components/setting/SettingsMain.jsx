@@ -16,15 +16,15 @@ export default function SettingsMain() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const text = formData.get("text").trim();
-    const phone = formData.get("phone").trim();
-    const email = formData.get("email").trim();
-    const address = formData.get("address").trim();
-    const linkedin = formData.get("linkedin").trim();
+    const text = formData.get("text");
+    const phone = formData.get("phone");
+    const email = formData.get("email");
+    const address = formData.get("address");
+    const linkedin = formData.get("linkedin");
 
     if (!text || text.length < 30 || text.length > 150) {
       return toast.error(
-        "Footer text must be between 30 and 200 characters long!"
+        "Footer text must be between 30 and 150 characters long!"
       );
     }
 
@@ -33,42 +33,49 @@ export default function SettingsMain() {
     }
 
     if (!phone || !/^\d+$/.test(phone)) {
-      return toast.error("Please enter a valid phone number!");
+      return toast.error("Please enter a valid phone number (digits only)!");
     }
     if (phone.length < 9 || phone.length > 16) {
       return toast.error("Phone number must be between 9 and 16 digits long!");
     }
-    if (!linkedin) {
-      return toast.error("Please enter a valid LinkedIn URL!");
+
+    if (!address || address.length < 10) {
+      return toast.error("Address must be at least 10 characters long!");
     }
 
-    const currentData = data[0] || {};
-
-    const hasChanges =
-      text !== currentData.text ||
-      phone !== currentData.phone ||
-      email !== currentData.email ||
-      address !== currentData.address ||
-      linkedin !== currentData.linkedin;
-
-    if (!hasChanges) {
-      toast.error("No changes detected");
-      return;
+    if (
+      !linkedin ||
+      !/^(https?:\/\/)?(www\.)?linkedin\.com\/.+/i.test(linkedin)
+    ) {
+      return toast.error(
+        "Please enter a valid LinkedIn URL (e.g. https://linkedin.com/...)!"
+      );
     }
-    apiUpdateFooter(
-      {
-        id: currentData.id,
-        text,
-        phone,
-        email,
-        address,
-        linkedin,
-      },
-      {
-        onSuccess: () => toast.success("Footer updated successfully!"),
-        onError: () => toast.error("Failed to update footer"),
-      }
-    );
+    const currentData = data[0] || {
+      text: "",
+      phone: "",
+      email: "",
+      address: "",
+      linkedin: "",
+    };
+
+    if (
+      text === currentData.text &&
+      phone === String(currentData.phone) &&
+      email === currentData.email &&
+      address === currentData.address &&
+      linkedin === currentData.linkedin
+    ) {
+      return toast.error("No changes detected.");
+    }
+    apiUpdateFooter({
+      id: currentData.id,
+      text,
+      phone,
+      email,
+      address,
+      linkedin,
+    });
   };
 
   return (
