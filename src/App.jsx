@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
 import AdminLayout from "./components/adminLayout/AdminLayout";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/adminLayout/ProtectedRoute";
@@ -7,6 +12,7 @@ import Blog from "./pages/Blog";
 import BlogInformation from "./components/Blog/BlogInformation/BlogInformation";
 import CardInformation from "./components/home/serviciesCardInformation/CardInformation";
 import AboutMe from "./pages/AboutMe";
+import Patients from "./components/patients/Patients";
 const routes = [
   { path: "/login", element: <Login /> },
   {
@@ -21,14 +27,13 @@ const routes = [
     children: [
       { path: "", element: <Home /> },
       { path: "blog", element: <Blog /> },
-      { path: "blog/:id", element: <BlogInformation/>},
-      { path: "servicies/:id", element: <CardInformation/>},
-      { path: "About", element: <AboutMe/>}
-
+      { path: "blog/:id", element: <BlogInformation /> },
+      { path: "servicies/:id", element: <CardInformation /> },
+      { path: "About", element: <AboutMe /> },
+      { path: "Patients", element: <Patients /> },
     ],
   },
 ];
-
 
 function App() {
   return (
