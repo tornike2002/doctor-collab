@@ -15,6 +15,7 @@ export default function More({ patient, showMoreModal, setShowMoreModal }) {
             <div className="relative bg-lightSkyBlue bg-[#1b5eaa] rounded-lg shadow-lg p-8 w-[90%] max-w-md flex flex-col gap-2">
               <div className="pb-4 border-b border-gray-300 mb-4">
                 <div className="flex flex-col gap-4 my-4">
+                  <h1 className="text-2xl font-bold  mb-5">Name & ID</h1>
                   <div className="flex items-center gap-2">
                     <p className="text-white font-bold text-lg">
                       {patient.user_name}
@@ -33,6 +34,7 @@ export default function More({ patient, showMoreModal, setShowMoreModal }) {
                 </div>
 
                 <div className="flex flex-col gap-4 mt-4">
+                  <h1 className="text-2xl font-bold mb-5">Contact Us</h1>
                   <div className="flex items-center gap-2">
                     <p className="text-gray-300 text-base">
                       Phone: {patient.user_phone}
@@ -46,7 +48,10 @@ export default function More({ patient, showMoreModal, setShowMoreModal }) {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex  flex-col gap-2">
+                <h1 className="text-2xl font-bold mb-5">
+                  Detailed Information
+                </h1>
                 <p className="text-white italic text-sm">{patient.condition}</p>
               </div>
 

@@ -23,7 +23,7 @@ export default function PatientsList({ item, handleMoreClick, handleUpdate }) {
 
   return (
     <div className="px-2">
-      <div className="grid grid-cols-1 sm:grid-cols-5 bg-[#0682f5c9] py-3 items-center relative font-semibold text-gray-800 border-b border-gray-300 text-sm md:text-lg gap-2 sm:gap-0">
+      <div className="grid grid-cols-1 sm:grid-cols-5  py-3 items-center relative font-semibold text-gray-800 border-b border-gray-300 text-sm md:text-lg gap-2 sm:gap-0">
         <p className="px-3 min-w-[100px] text-center">{item.user_name}</p>
         <p className="px-3 min-w-[100px] text-center">{item.date}</p>
         <p className="px-3 min-w-[100px] text-center">{item.condition}</p>
@@ -49,7 +49,7 @@ export default function PatientsList({ item, handleMoreClick, handleUpdate }) {
           <p
             className={`px-3 text-sm md:text-lg text-center rounded-[3rem] py-2 font-bold shadow-md cursor-pointer transition-all duration-200 ${
               item.status === "Pending"
-                ? "bg-darkBlue text-white hover:bg-blue-900"
+                ? "bg-[#0b2e4e] text-white hover:bg-blue-900"
                 : "bg-green-700 text-white hover:bg-green-900"
             }`}
             onClick={handleStatusClick}
