@@ -15,7 +15,9 @@ export default function PatientsList({ item, handleMoreClick, handleUpdate }) {
   };
 
   const saveStatus = () => {
-    handleUpdate(item.id, { status: selectedStatus });
+    if (item.status !== "Pending" || selectedStatus !== "Pending") {
+      handleUpdate(item.id, { status: selectedStatus });
+    }
     setIsEditingStatus(false);
   };
 

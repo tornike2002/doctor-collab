@@ -6,6 +6,7 @@ export default function More({ patient, showMoreModal, setShowMoreModal }) {
   const closeModal = () => {
     setShowMoreModal(false);
   };
+
   return (
     <div>
       {showMoreModal && (
@@ -15,31 +16,42 @@ export default function More({ patient, showMoreModal, setShowMoreModal }) {
               <div className="pb-4 border-b border-gray-300 mb-4">
                 <div className="flex flex-col gap-4 my-4">
                   <div className="flex items-center gap-2">
-                    <p>{patient.user_name}</p>
+                    <p className="text-white font-bold text-lg">
+                      {patient.user_name}
+                    </p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <p>Patient ID: {patient.id}</p>
+                    <p className="text-gray-200 font-medium text-base">
+                      Patient ID: {patient.id}
+                    </p>
                   </div>
                   <div className="flex items-center gap-2 ">
-                    <p>Last Visit Date: {patient.date}</p>
+                    <p className="text-gray-200 font-medium text-base">
+                      Last Visit Date: {patient.date}
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-4 mt-4">
                   <div className="flex items-center gap-2">
-                    <p>Phone: {patient.user_phone}</p>
+                    <p className="text-gray-300 text-base">
+                      Phone: {patient.user_phone}
+                    </p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <p>Email: {patient.user_email}</p>
+                    <p className="text-gray-300 text-base">
+                      Email: {patient.user_email}
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <div className=" flex items-center gap-2">
-                <p>{patient.condition}</p>
+              <div className="flex items-center gap-2">
+                <p className="text-white italic text-sm">{patient.condition}</p>
               </div>
+
               <button
-                className="mt-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-500"
+                className="mt-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-500 text-lg font-semibold"
                 onClick={closeModal}
               >
                 Close
