@@ -9,7 +9,6 @@ import PaginationSkeleton from "./PaginationSkeleton";
 import ErrorMessage from "../ErrorMessage";
 
 export default function Patients() {
-  // Call hooks at the top level
   const { data, isLoading, isError, error } = useGetPatients();
   const { mutate: updatePatients } = useUpdatePatients();
   const [selectedPatient, setSelectedPatient] = useState(null);
@@ -25,7 +24,6 @@ export default function Patients() {
 
   if (isLoading) return <PaginationSkeleton />;
 
-  // Pagination BRRR
   const count = data.length;
   const totalPages = count ? Math.ceil(count / itemsPerPage) : 1;
 
@@ -38,30 +36,26 @@ export default function Patients() {
     updatePatients({ id, status: "Done" });
   };
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setSearchParams({ page: currentPage + 1 });
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setSearchParams({ page: currentPage - 1 });
-    }
-  };
-
   const handlePageChange = (page) => {
     setSearchParams({ page });
   };
+
   if (isError) return <ErrorMessage errorMessage={error.message} />;
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = data.slice(startIndex, endIndex);
 
   return (
-    <div>
-      <h1 className="text-[40px] p-3 font-bold">Patients list</h1>
-      <div className="mt-10">
+    <div className="bg-gray-100 p-5 shadow-lg rounded-lg">
+      <h1 className="text-3xl font-bold text-center mb-5">Patients List</h1>
+      <div className="bg-white p-5 rounded-lg shadow-md">
+        <div className="grid grid-cols-4 font-semibold border-b pb-2 mb-4">
+          <h1>Name Surname</h1>
+          <h1>Date of last visit</h1>
+          <h1>Diagnosis type</h1>
+          <h1>Status</h1>
+        </div>
         {currentItems.map((item) => (
           <PatientsList
             key={item.id}
@@ -80,13 +74,13 @@ export default function Patients() {
         />
       )}
 
-      <PatientPagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        handlePrevPage={handlePrevPage}
-        handleNextPage={handleNextPage}
-        handlePageChange={handlePageChange}
-      />
+      <div className="mt-5 flex justify-center">
+        <PatientPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          handlePageChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 }
