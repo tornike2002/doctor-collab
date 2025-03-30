@@ -13,6 +13,7 @@ import BlogInformation from "./components/Blog/BlogInformation/BlogInformation";
 import CardInformation from "./components/home/serviciesCardInformation/CardInformation";
 import AboutMe from "./pages/AboutMe";
 import Settings from "./pages/Settings";
+import Patients from "./components/patients/Patients";
 const routes = [
   { path: "/login", element: <Login /> },
   {
@@ -31,6 +32,7 @@ const routes = [
       { path: "servicies/:id", element: <CardInformation /> },
       { path: "About", element: <AboutMe /> },
       { path: "Settings", element: <Settings /> },
+      { path: "Patients", element: <Patients /> },
     ],
   },
 ];
