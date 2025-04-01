@@ -1,31 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useGetPatients } from "../../hooks/useGetPatients";
+import { useUpdatePatients } from "../../hooks/useUpdatePatients";
+import { usePatientsPagination } from "../../hooks/usePatientsPagination";
 import More from "./More";
 import PatientsList from "./PatientsList";
-import { useUpdatePatients } from "../../hooks/useUpdatePatients";
-import PatientPagination from "./PatientPagination";
 import PaginationSkeleton from "./PaginationSkeleton";
 import ErrorMessage from "../ErrorMessage";
-
+import PatientPagination from "./PatientPagination";
 export default function Patients() {
-  const { data, isLoading, isError, error } = useGetPatients();
   const { mutate: updatePatients } = useUpdatePatients();
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [showMoreModal, setShowMoreModal] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const itemsPerPage = 3;
   const currentPage = parseInt(searchParams.get("page")) || 1;
+  const itemsPerPage = 2;
+
+  const { data, isLoading, isError, error } = usePatientsPagination(
+    currentPage,
+    itemsPerPage
+  );
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
 
   if (isLoading) return <PaginationSkeleton />;
+  if (isError)
+    return (
+      <ErrorMessage errorMessage={error?.message || "An error occurred"} />
+    );
 
-  const count = data.length;
-  const totalPages = count ? Math.ceil(count / itemsPerPage) : 1;
+  const patients = data?.data || [];
+  const totalPages = Math.ceil((data?.total || 1) / itemsPerPage);
 
   const handleMoreClick = (patient) => {
     setSelectedPatient(patient);
@@ -35,16 +41,6 @@ export default function Patients() {
   const handleUpdate = (id) => {
     updatePatients({ id, status: "Done" });
   };
-
-  const handlePageChange = (page) => {
-    setSearchParams({ page });
-  };
-
-  if (isError) return <ErrorMessage errorMessage={error.message} />;
-
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentItems = data.slice(startIndex, endIndex);
 
   return (
     <div className="bg-gray-100 p-5 shadow-lg rounded-lg">
@@ -56,7 +52,7 @@ export default function Patients() {
           <h1>Diagnosis type</h1>
           <h1>Status</h1>
         </div>
-        {currentItems.map((item) => (
+        {patients.map((item) => (
           <PatientsList
             key={item.id}
             item={item}
@@ -76,9 +72,9 @@ export default function Patients() {
 
       <div className="mt-5 flex justify-center">
         <PatientPagination
-          currentPage={currentPage}
           totalPages={totalPages}
-          handlePageChange={handlePageChange}
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
         />
       </div>
     </div>
