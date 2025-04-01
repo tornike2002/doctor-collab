@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
 export default function AppointmentsCard({ data, id }) {
   const { image, title, content } = data;
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function AppointmentsCard({ data, id }) {
       behavior: "smooth",
     });
   };
+
   return (
     <div
       onClick={navigateHandler}

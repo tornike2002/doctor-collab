@@ -13,7 +13,7 @@ export default function Patients() {
   const [showMoreModal, setShowMoreModal] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = parseInt(searchParams.get("page")) || 1;
-  const itemsPerPage = 2;
+  const itemsPerPage = 3;
 
   const { data, isLoading, isError, error } = usePatientsPagination(
     currentPage,
@@ -31,7 +31,7 @@ export default function Patients() {
     );
 
   const patients = data?.data || [];
-  const totalPages = Math.ceil((data?.total || 1) / itemsPerPage);
+  const totalPages = Math.ceil(data.count / itemsPerPage);
 
   const handleMoreClick = (patient) => {
     setSelectedPatient(patient);
