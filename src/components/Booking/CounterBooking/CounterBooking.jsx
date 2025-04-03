@@ -14,7 +14,7 @@ export default function CounterBooking() {
       <CounterBookingContent
         appointment={"Appointment Statistics"}
         month={"This Month"}
-        total={data?.length || 0} // Safely get length with fallback to 0
+        total={data?.length}
       />
     </div>
   );

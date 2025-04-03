@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import ServiceSkeleton from "./ServiceSkeleton";
 export default function ServiceCard() {
   const { data, isLoading, isError, error } = useGetServices();
-  const { mutate, isPending } = useAddServices();
+  const { mutate } = useAddServices();
   const [openModalId, setOpenModalId] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [addContent, setAddContent] = useState("");
@@ -122,9 +122,9 @@ export default function ServiceCard() {
       />
 
       <div className="grid grid-cols-1 gap-20 gap-y-10 p-4 sm:grid-cols-2 lg:grid-cols-3">
-        {data.services.map((service) => (
+        {data.map((service) => (
           <CardGrid
-          key={service.id}
+            key={service.id}
             service={service}
             isLoading={isLoading}
             openModalId={openModalId}

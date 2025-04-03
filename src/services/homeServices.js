@@ -42,12 +42,13 @@ export const apiUpdateDoctorBio = async function apiUpdateDoctorBio({
 };
 //servoces moaq
 export const apiGetServices = async () => {
-  let { data: services, error } = await supabase
+  let { data, error } = await supabase
     .from("services")
     .select("*")
     .order("id", { ascending: true })
     .limit(6);
-  return { services, error };
+  if (error) throw new Error(error.message);
+  return data;
 };
 export const AddServices = async ({ image, title, content }) => {
   let { data: services, error } = await supabase
@@ -75,9 +76,6 @@ export const deleteServices = async (id) => {
   if (error) throw new Error(error.message);
   return deleteService;
 };
-
-
-
 
 export const getServicesId = async (id) => {
   let { data, error } = await supabase

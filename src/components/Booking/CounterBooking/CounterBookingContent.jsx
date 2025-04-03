@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CounterBookingContent({ appointment, total, month }) {
   return (
-    <div className="bg-[#dbf3f3e5] w-[70%]   shadow-xl p-3 flex flex-col gap-4 rounded-[18px] my-40">
+    <div className="bg-[#f1f8f8e5] w-[90%]   shadow-xl p-3 flex flex-col gap-4 rounded-[18px] my-40">
       <div className="flex items-center justify-between">
         <h1 className="font-robotoMedium text-[#101012] text-[17px]">
           {appointment}
