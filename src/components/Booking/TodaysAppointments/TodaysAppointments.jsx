@@ -5,7 +5,6 @@ import { bookingGetServicies } from "../../../hooks/bookingGetServicies";
 
 export default function TodaysAppointments() {
   const { data, isLoading, isError, error } = bookingGetServicies();
-  console.log(data);
   if (isLoading) return <ServiceSkeleton />;
   if (isError) return <ErrorMessage errorMessage={error.message} />;
 

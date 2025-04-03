@@ -15,8 +15,7 @@ import AboutMe from "./pages/AboutMe";
 import Settings from "./pages/Settings";
 import Patients from "./components/patients/Patients";
 import Booking from "./pages/Booking";
-import BookingService from "./components/Booking/BookingServiceContent/BookingService";
-import BookingPage from "./components/Booking/BookingServiceContent/BookingPage";
+import SingleBookingPage from "./components/Booking/BookingServiceContent/SingleBookingPage";
 const routes = [
   { path: "/login", element: <Login /> },
   {
@@ -37,7 +36,7 @@ const routes = [
       { path: "Settings", element: <Settings /> },
       { path: "Patients", element: <Patients /> },
       { path: "Booking", element: <Booking /> },
-      { path: "Booking/:id", element: <BookingPage /> },
+      { path: "Booking/:id", element: <SingleBookingPage /> },
     ],
   },
 ];

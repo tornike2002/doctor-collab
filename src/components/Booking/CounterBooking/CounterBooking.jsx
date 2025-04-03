@@ -10,11 +10,10 @@ export default function CounterBooking() {
   if (isError) return <ErrorMessage errorMessage={error.message} />;
   return (
     <div className="flex justify-center items-center">
-      {" "}
       <CounterBookingContent
         appointment={"Appointment Statistics"}
         month={"This Month"}
-        total={data?.length}
+        total={data.length}
       />
     </div>
   );
