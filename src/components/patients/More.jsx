@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "../Modal/Modal";
 
 export default function More({ patient, showMoreModal, setShowMoreModal }) {
-  console.log(patient);
+
   const closeModal = () => {
     setShowMoreModal(false);
   };

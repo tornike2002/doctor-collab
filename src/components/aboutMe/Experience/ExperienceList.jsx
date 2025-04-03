@@ -10,7 +10,7 @@ import ExperienceMap from "./ExperienceMap";
 import { toast } from "react-toastify";
 
 export default function ExperienceList({ data, handleDelete }) {
-  console.log(handleDelete);
+ 
   const [modalEdit, setModalEdit] = useState(false);
   const [selectedExperience, setSelectedExperience] = useState(null);
   const [isPresent, setIsPresent] = useState(false);

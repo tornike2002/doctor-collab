@@ -7,7 +7,7 @@ import BlogCarouselSkeelton from "./BlogCarouselSkeelton";
 
 export default function BlogCarousel() {
   const { data, isLoading, isError, error } = useGetBlogAdd();
-console.log(data)
+
   if (isLoading) {
     return <BlogCarouselSkeelton/>;
   }

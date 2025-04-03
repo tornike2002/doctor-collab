@@ -16,7 +16,7 @@ import Settings from "./pages/Settings";
 import Patients from "./components/patients/Patients";
 import Booking from "./pages/Booking";
 import SingleBookingPage from "./components/Booking/BookingServiceContent/SingleBookingPage";
-import { elements } from "chart.js";
+
 import Trend from "./pages/Trend";
 const routes = [
   { path: "/login", element: <Login /> },

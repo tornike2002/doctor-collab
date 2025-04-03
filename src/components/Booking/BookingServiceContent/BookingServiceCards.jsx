@@ -4,7 +4,6 @@ import ErrorMessage from "../../ErrorMessage";
 import BookingService from "./BookingService";
 function BookingServiceCards() {
   const { data, isLoading, isError, error } = useGetPatients();
-  console.log(data);
   if (isLoading) return <ServiceSkeleton />;
   if (isError) return <ErrorMessage errorMessage={error.message} />;
 

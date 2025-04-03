@@ -7,7 +7,7 @@ import useUpdateBlog from "../../../hooks/useUpdateBlog";
 export default function BlogModal({ data, handleDelete, closeModal, errors, setErrors }) {
   const { mutate: updateBlog } = useUpdateBlog();
   const fileInputRef = useRef(null);
-  console.log(data.title)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -50,7 +50,6 @@ export default function BlogModal({ data, handleDelete, closeModal, errors, setE
       description.trim() === data.description.trim() &&
       (!imageFile || imageFile.size === 0)
     ) {
-      console.log("No changes detected.");
       toast.error("No changes detected.");
       return;
     }
