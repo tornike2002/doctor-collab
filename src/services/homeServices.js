@@ -86,3 +86,18 @@ export const getServicesId = async (id) => {
 
   return { service: data, error };
 };
+
+export async function apiGetHeroImage() {
+  let { data, error } = await supabase.from("heroImage").select("*");
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+export async function apiUptHeroImage({ img, id }) {
+  let { data, error } = await supabase
+    .from("heroImage")
+    .update({ img: img })
+    .eq("id", id);
+  if (error) throw new Error(error.message);
+  return data;
+}
