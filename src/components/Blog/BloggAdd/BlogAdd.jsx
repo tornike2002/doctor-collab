@@ -10,7 +10,7 @@ import Modal from "../../Modal/Modal";
 import { useDeleteBlogs } from "../../../hooks/useDeleteBlogs";
 import BlogSkeleton from "./BlogSkeleton";
 import ErrorMessage from "../../ErrorMessage";
-import BlogList from "./blogList";
+import BlogList from "./BlogList";
 export default function BlogAdd() {
   const { data: blogs, isError, isLoading, error } = useGetBlogAdd();
 
