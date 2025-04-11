@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { updatePatients } from "../services/Patients";
+import { updatePatients } from "../services/patients";
 
 export const useUpdatePatients = () => {
   const queryClient = useQueryClient();
