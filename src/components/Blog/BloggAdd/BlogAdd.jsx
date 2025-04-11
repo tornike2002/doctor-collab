@@ -13,11 +13,11 @@ import { useNavigate } from 'react-router-dom';
 import { useDeleteBlogs } from '../../../hooks/useDeleteBlogs';
 import BlogSkeleton from './BlogSkeleton';
 import ErrorMessage from '../../ErrorMessage';
-import BlogList from './BlogList.JSX';
+import BlogList from './blogList';
 export default function BlogAdd() {
     const { data: blogs, isError, isLoading, error } = useGetBlogAdd();
    
-    const { mutate: AddBlogInfo, isPending } = useAddBlog();
+    const { mutate: AddBlogInfo } = useAddBlog();
     const { mutate: deleteBlogs } = useDeleteBlogs();
     const [showForm, setShowForm] = useState(false);
     const [errors, setErrors] = useState({
