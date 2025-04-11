@@ -7,7 +7,7 @@ export const usePatientsPagination = (pageNumber, itemsPerPage) => {
   const end = start + itemsPerPage - 1;
 
   return useQuery({
-    queryKey: ["patients", pageNumber],
+    queryKey: ["booking", pageNumber],
     keepPreviousData: true,
     queryFn: () => patientsPagination({ start, end }),
   });

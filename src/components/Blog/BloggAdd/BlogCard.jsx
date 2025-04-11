@@ -7,31 +7,21 @@ import { Link } from "react-router-dom";
 
 export default function BlogCard({ data, handleDelete, errors, setErrors }) {
   const navigate = useNavigate();
-  
+
   const [openModalId, setOpenModalId] = useState(null);
-  
-
-  
-
-
-
-
-  
- 
 
   return (
     <div className="relative w-full p-[40px]">
       <div className="shadow-2xl rounded-[15px] cursor-pointer bg-white transition-transform duration-300 ease-in-out hover:scale-105">
         <div className="relative rounded-[15px] p-[30px]">
           <Link to={`/blog/${data.id}`}>
-          <img
-            src={data.img}
-            
-            alt="main_picture"
-            className="w-full h-[350px] object-cover rounded-t-[15px] cursor-pointer object-center"
-          />
+            <img
+              src={data.img}
+              alt="main_picture"
+              className="w-full h-[350px] object-cover rounded-t-[15px] cursor-pointer object-center"
+            />
           </Link>
-        
+
           <img
             src={threedot}
             alt="menu"
@@ -49,11 +39,8 @@ export default function BlogCard({ data, handleDelete, errors, setErrors }) {
               {data.slug}
             </p>
             <p className="font-heeboRegular text-[18px] leading-relaxed mb-4 break-words whitespace-normal">
-          
-               {data.description.slice(0, 150)}...
-             
+              {data.description.slice(0, 150)}...
             </p>
-           
           </div>
         </div>
         {openModalId === data.id && (
@@ -67,9 +54,7 @@ export default function BlogCard({ data, handleDelete, errors, setErrors }) {
             />
           </Modal>
         )}
-        
       </div>
-     
     </div>
   );
 }

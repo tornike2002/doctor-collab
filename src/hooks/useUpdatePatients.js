@@ -9,7 +9,7 @@ export const useUpdatePatients = () => {
   return useMutation({
     mutationFn: ({ id, status }) => updatePatients(id, status),
     onSuccess: () => {
-      queryClient.invalidateQueries(["patients"]);
+      queryClient.invalidateQueries(["booking"]);
       toast.success("patients  status updated successfully");
     },
     onError: (error) => {

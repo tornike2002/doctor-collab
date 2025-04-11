@@ -1,9 +1,8 @@
 import supabase from "./supabase";
 
-
 export const updatePatients = async (id, status) => {
   const { data, error } = await supabase
-    .from("patients")
+    .from("booking")
     .update({ status, id })
     .eq("id", id);
   if (error) throw new Error(error.message);
@@ -12,7 +11,7 @@ export const updatePatients = async (id, status) => {
 
 export const getPatientsId = async (id) => {
   let { data, error } = await supabase
-    .from("patients")
+    .from("booking")
     .select("*")
     .eq("id", id)
     .single();
@@ -23,7 +22,7 @@ export const getPatientsId = async (id) => {
 
 export const patientsPagination = async ({ start, end }) => {
   const { data, error, count } = await supabase
-    .from("patients")
+    .from("booking")
     .select("*", { count: "exact" })
     .range(start, end);
 

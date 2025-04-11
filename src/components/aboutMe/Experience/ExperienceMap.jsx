@@ -25,11 +25,11 @@ export default function ExperienceMap({
           </div>
 
           <div className="flex flex-col justify-center text-[9px] md:text-[15px] lg:text-[20px]">
-            <h2 className="font-poppinsExtraBold leading-[135%] uppercase">
+            <h2 className="font-poppinsExtraBold font-bold leading-[135%] uppercase">
               {item.place}
             </h2>
             <div className="flex gap-4">
-              <h3 className="font-poppinsExtraBold uppercase">
+              <h3 className="font-poppinsExtraBold font-bold  uppercase">
                 {item.department}
               </h3>
               <span className="font-heeboRegular opacity-50">

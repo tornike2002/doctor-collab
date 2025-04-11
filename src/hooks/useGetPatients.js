@@ -5,6 +5,6 @@ import { getPatients } from "../services/Booking";
 export const useGetPatients = () => {
   return useQuery({
     queryFn: getPatients,
-    queryKey: ["patients"],
+    queryKey: ["booking"],
   });
 };

@@ -64,7 +64,7 @@ export default function AboutMeEducation() {
   }
 
   if (isError) return <ErrorMessage errorMessage={error.message} />;
- 
+
   return (
     <div>
       <EducationList handleDelete={handleDelete} data={data} />

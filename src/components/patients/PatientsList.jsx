@@ -23,47 +23,51 @@ export default function PatientsList({ item, handleMoreClick, handleUpdate }) {
 
   return (
     <div className="px-2">
-      <div className="grid grid-cols-1 sm:grid-cols-5 py-3 items-center relative font-semibold text-gray-800 border-b border-gray-300 text-sm md:text-lg gap-2 sm:gap-0">
-        <p className="px-3 min-w-[100px] text-center">{item.user_name}</p>
-        <p className="px-3 min-w-[100px] text-center">{item.date}</p>
-        <p className="px-3 min-w-[100px] text-center">{item.condition}</p>
+      <div className="grid grid-cols-5 items-center py-4 border-b border-gray-300 font-medium text-gray-800 text-sm md:text-base">
+        <div className="text-center px-2 truncate">{item.user_name}</div>
+        <div className="text-center px-2">{item.date}</div>
+        <div className="text-center px-2 truncate">{item.condition}</div>
 
-        {isEditingStatus ? (
-          <div className="flex flex-wrap gap-2 px-3 justify-center">
-            <select
-              value={selectedStatus}
-              onChange={handleStatusChange}
-              className="rounded-[3rem] py-2 px-3 border border-gray-400 shadow-sm text-sm md:text-lg"
+        <div className="flex justify-center items-center px-2">
+          {isEditingStatus ? (
+            <div className="flex gap-2 items-center">
+              <select
+                value={selectedStatus}
+                onChange={handleStatusChange}
+                className="rounded-full py-1 px-3 border border-gray-400 shadow-sm text-sm"
+              >
+                <option value="Pending">Pending</option>
+                <option value="Done">Done</option>
+              </select>
+              <button
+                onClick={saveStatus}
+                className="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700 text-sm shadow"
+              >
+                Save
+              </button>
+            </div>
+          ) : (
+            <p
+              className={`py-1 px-3 text-sm font-semibold rounded-full text-white cursor-pointer shadow-md transition-all ${
+                item.status === "Pending"
+                  ? "bg-[#0b2e4e] hover:bg-blue-900"
+                  : "bg-green-700 hover:bg-green-900"
+              }`}
+              onClick={handleStatusClick}
             >
-              <option value="Pending">Pending</option>
-              <option value="Done">Done</option>
-            </select>
-            <button
-              onClick={saveStatus}
-              className="bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 text-sm md:text-lg shadow-md"
-            >
-              Save
-            </button>
-          </div>
-        ) : (
-          <p
-            className={`px-3 text-sm md:text-lg text-center rounded-[3rem] py-2 font-bold shadow-md cursor-pointer transition-all duration-200 ${
-              item.status === "Pending"
-                ? "bg-[#0b2e4e] text-white hover:bg-blue-900"
-                : "bg-green-700 text-white hover:bg-green-900"
-            }`}
-            onClick={handleStatusClick}
+              {item.status}
+            </p>
+          )}
+        </div>
+
+        <div className="text-center px-2">
+          <button
+            className="text-blue-700 font-bold hover:underline text-sm"
+            onClick={() => handleMoreClick(item)}
           >
-            {item.status}
-          </p>
-        )}
-
-        <p
-          className="px-3 text-sm md:text-lg text-center text-blue-700 font-bold cursor-pointer hover:underline"
-          onClick={() => handleMoreClick(item)}
-        >
-          More
-        </p>
+            More
+          </button>
+        </div>
       </div>
     </div>
   );

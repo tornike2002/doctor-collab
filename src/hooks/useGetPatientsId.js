@@ -4,7 +4,7 @@ import { getPatientsId } from "../services/Patients";
 
 export const useGetPatientsId = (id) => {
   return useQuery({
-    queryKey: ["patients", id],
+    queryKey: ["booking", id],
     queryFn: () => getPatientsId(id),
     enabled: !!id,
   });

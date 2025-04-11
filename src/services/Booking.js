@@ -2,7 +2,7 @@ import supabase from "./supabase";
 
 export const getPatients = async () => {
   const { data, error } = await supabase
-    .from("patients")
+    .from("booking")
     .select("*")
     .order("date", { ascending: true })
     .limit(6);

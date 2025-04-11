@@ -31,13 +31,13 @@ export default function AwardsMap({
                 {item.name}
               </h2>
               <div className="flex gap-4">
-                <p className="text-gray-800 text-semiTransparent text-[1.15rem] font-bold break-all">
-                  {item.awardedBy}
-                </p>
                 <p className="text-gray-600 text-semiTransparent">
                   {item.date}
                 </p>
               </div>
+              <p className="text-gray-800 text-semiTransparent text-[1.15rem] font-bold break-all">
+                {item.awardedBy}
+              </p>
             </div>
           </div>
 
