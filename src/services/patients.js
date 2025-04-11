@@ -1,6 +1,6 @@
 import supabase from "./supabase";
 
-export const updatePatients = async (id, status) => {
+export const updatePatients = async ({ id, status }) => {
   const { data, error } = await supabase
     .from("booking")
     .update({ status, id })
